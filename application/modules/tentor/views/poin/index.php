@@ -2,15 +2,15 @@
     <div class="wt-haslayout wt-dbsectionspace">
         <div class="wt-dashboardbox wt-dashboardtabsholder">
             <div class="wt-dashboardboxtitle">
-                <h2>Poin</h2>
+                <h2>Deposit</h2>
             </div>
 
 
             <div class="wt-personalskillshold row">
 
-                <div class="wt-yourdetails wt-tabsinfo col-12 col-lg-6 ">
-                    <div class="wt-tabscontenttitle text-center" style="border-right: 3px solid #ff5851">
-                        <h2>Jumlah Poin</h2>
+                <div class="wt-yourdetails wt-tabsinfo col-12 col-lg-6">
+                    <div class="wt-tabscontenttitle">
+                        <h2>Jumlah Deposit</h2>
                     </div>
                     <div class="wt-insightsitem wt-dashboardbox ml-3">
                         <div class="wt-title text-center">
@@ -19,24 +19,23 @@
                         </div>
 
                         <div class="wt-insightdetails">
-                            <a href="#">Poin</a>
+                            <a href="#">Deposit</a>
                         </div>
                     </div>
-                    <a href="<?= base_url('tentor/poin/tambah_poin') ?>" class="wt-btn float-md-right mt-3">Tambah Poin</a>
                 </div>
 
                 <div class="wt-yourdetails wt-tabsinfo col-12 col-lg-6">
-                    <div class="wt-tabscontenttitle text-center" style="border-right: 3px solid #ff5851">
-                        <h2>Cairkan Poin</h2>
+                    <div class="wt-tabscontenttitle">
+                        <h2>Cairkan Deposit</h2>
                     </div>
 
                     <form class="wt-formtheme wt-userform text-center">
                         <div class="wt-description">
-                            <p>Jumlah Poin Yang Dicairkan Minimal Rp. 500.000 <br> Jumlah Poin Tidak Boleh Kurang Dari Rp. 200.000</p>
+                            <p>Jumlah Deposit Yang Dicairkan Minimal Rp. 500.000 <br> Jumlah Deposit Tidak Boleh Kurang Dari Rp. 200.000</p>
                         </div>
                         <div class="form-group ">
                             <input type="text" name="tagline" class="form-control" value="Rp. ">
-                            <input type="text" name="rekening" class="form-control mt-2" value="<?= $profil->rekening ?>" placeholder="Nomor Rekening">
+                            <input type="text" name="tagline" class="form-control mt-2" value="Nomor Rekening">
                         </div>
 
                         <a href="#" class="wt-btn float-md-right mt-3">Cairkan</a>
@@ -45,7 +44,7 @@
 
                 <div class="wt-yourdetails wt-tabsinfo col-12">
                     <div class="wt-tabscontenttitle">
-                        <h2>History Poin</h2>
+                        <h2>History Deposit</h2>
                     </div>
 
                     <form class="wt-formtheme wt-userform">
@@ -71,7 +70,7 @@
                                         </tr>
                                         <tr>
                                             <th>08-08-2019</th>
-                                            <th>Mencairkan Poin</th>
+                                            <th>Mencairkan Deposit</th>
                                             <th>Rp. 1.800.000</th>
                                             <th>Rp. 1.200.000</th>
                                             <th>Action</th>

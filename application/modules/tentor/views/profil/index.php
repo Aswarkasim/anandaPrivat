@@ -16,6 +16,8 @@
                                     <div class="wt-userprofile">
                                         <figure>
                                             <img src="<?= base_url('assets/uploads/images/' . $tentor->foto); ?>" alt="img description">
+                                            <div class="wt-userdropdown wt-online">
+                                            </div>
                                         </figure>
                                         <div class="wt-title">
                                             <h4>Hubungi Saya</h4>
@@ -42,7 +44,7 @@
                                                     </div>
 
                                                     <div class="wt-insightdetails">
-                                                        <a href="<?= base_url() ?>tentor/poin">Poin</a>
+                                                        <a href="#">Deposit</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -66,32 +68,21 @@
                                         <h2><?= $tentor->nama_lengkap ?></h2>
                                         <ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo mb-4">
                                             <li><span>
-                                                    <?php if ($tentor->gender == '') {
-                                                        echo '<i class="fa fa-male mr-2" style="color: lightblue;" aria-hidden="true"></i><i class="fa fa-female mr-2" style="color: pink;" aria-hidden="true"></i> Jenis Kelamin';
-                                                    } else if ($tentor->gender == 'Pria') {
+                                                    <?php
+                                                    if ($tentor->gender == "Laki-laki") {
                                                         echo '<i class="fa fa-male mr-2" style="color: lightblue;" aria-hidden="true"></i> Pria';
-                                                    } else if ($tentor->gender == 'Wanita') {
+                                                    } else if ($tentor->gender == "Perempuan") {
                                                         echo '<i class="fa fa-female mr-2" style="color: pink;" aria-hidden="true"></i> Perempuan';
                                                     }
                                                     ?>
-                                                </span>
-                                            </li>
+
+
+                                                </span></li>
                                             <li><span>
                                                     <i class="fa fa-suitcase mr-2" aria-hidden="true"></i>
-                                                    <?php if ($tentor->pekerjaan == '') {
-                                                        echo "Pekerjaan";
-                                                    } else {
-                                                        echo $tentor->pekerjaan;
-                                                    } ?>
-                                                </span>
-                                            </li>
+                                                    <?= $tentor->pekerjaan ?></span></li>
                                             <li><i class="fa fa-map-marker mr-2" style="color:red;" aria-hidden="true"></i>
-                                                <?php if ($alamat->alamat == '') {
-                                                    echo "Alamat";
-                                                } else {
-                                                    echo strtoupper($alamat->alamat) . ', ' . strtoupper($alamat->nama_kabupaten) . ', ' . strtoupper($alamat->nama_provinsi);
-                                                } ?>
-                                            </li>
+                                                <?= $tentor->alamat ?></li>
                                         </ul>
                                         <div>
                                             <h4>Tentang Saya</h4>
@@ -110,38 +101,36 @@
                                             <div class="wt-contentarticle tab-pane fade active show" id="kompetensi">
                                                 <div class="table-responsive">
                                                     <table class="table table-hover">
-                                                        <thead style="background-color:#ff5851" class="text-white">
+                                                        <thead class="table-danger">
                                                             <tr>
                                                                 <th>No</th>
                                                                 <th>Kompetensi</th>
-                                                                <th>Jenjang</th>
-                                                                <th>Status</th>
+                                                                <th>Tingkat</th>
+                                                                <th>Kelas Selesai</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <?php $no = 1;
-                                                            foreach ($kompetensi as $row) { ?>
-                                                                <tr>
-                                                                    <th><?= $no ?></th>
-                                                                    <td><?= $row->nama_kursus ?></td>
-                                                                    <td><?= $row->nama_jenjang ?></td>
-                                                                    <td>
-                                                                        <?php if ($row->status == '') {
-                                                                            echo '<a href="#" class="btn btn-warning"><small>Menunggu Wawancara</small></a>';
-                                                                        } elseif ($row->status == 'aktif') {
-                                                                            echo '<a class="btn btn-success text-white"><small>Aktif</small></a></td>';
-                                                                        } else {
-                                                                            echo '<a class="btn btn-danger text-white"><small>Tidak Aktif</small></a>';
-                                                                        } ?>
-
-                                                                    </td>
-                                                                </tr>
-                                                                <?php $no++;
-                                                            } ?>
-
+                                                            <tr>
+                                                                <th>1</th>
+                                                                <td>Matematika</td>
+                                                                <td>SMP Kelas 3</td>
+                                                                <td>3</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>2</th>
+                                                                <td>Matematika</td>
+                                                                <td>SMA Kelas 1</td>
+                                                                <td>0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>3</th>
+                                                                <td>Rekayasa Perangkat Lunak</td>
+                                                                <td>Perguruan Tinggi Tahun Pertama</td>
+                                                                <td>7</td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
-                                                    <a href="<?= base_url() ?>tentor/kompetensi" class="wt-btn float-right mb-3">Lihat Detail</a>
+                                                    <a href="#" class="wt-btn float-right mb-3">Lihat Detail</a>
                                                     <br>
                                                     <br>
                                                 </div>
@@ -149,28 +138,48 @@
                                             <div class="wt-contentarticle tab-pane fade" id="siswabimbingan">
                                                 <div class="table-responsive">
                                                     <table class="table table-hover">
-                                                        <thead style="background-color:#ff5851" class="text-white">
+                                                        <thead class="table-danger">
                                                             <tr>
                                                                 <th>No</th>
+                                                                <th>Nama</th>
                                                                 <th>Kursus</th>
-                                                                <th>Jenjang</th>
-                                                                <th>Siswa</th>
+                                                                <th>Tingkat</th>
+                                                                <th>alamat</th>
                                                                 <th>Jadwal</th>
-                                                                <th>Waktu</th>
+                                                                <th>Pukul</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
                                                                 <th>1</th>
-                                                                <td>Renang</td>
-                                                                <td>SMP Kelas 1</td>
-                                                                <td>Dirga Pratama</td>
-                                                                <td>Minggu</td>
-                                                                <td>08.00-09.00</td>
+                                                                <td>Aswar Kasim</td>
+                                                                <td>Matematika</td>
+                                                                <td>SMP Kelas 3</td>
+                                                                <td>Jalan Sulawesi No.12</td>
+                                                                <td>Senin, Rabu, & Jumat</td>
+                                                                <td>09.00-10.30</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>2</th>
+                                                                <td>Muh. Zuhdi Afief </td>
+                                                                <td>Rekayasa Perangkat Lunak</td>
+                                                                <td>Perguruan Tinggi Tahun Pertama</td>
+                                                                <td>Jalan Kalimantan No.31</td>
+                                                                <td>Selasa, Kamis, & Sabtu</td>
+                                                                <td>13.30-15.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>3</th>
+                                                                <td>Mawardi Kudin</td>
+                                                                <td>Matematika</td>
+                                                                <td>SMA Kelas 1</td>
+                                                                <td>Jalan Sarappo No.16</td>
+                                                                <td>Senin, Rabu, & Jumat</td>
+                                                                <td>20.00-21.30</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    <a href="<?= base_url() ?>tentor/bimbingan" class="wt-btn float-right mb-3">Lihat Detail</a>
+                                                    <a href="#" class="wt-btn float-right mb-3">Lihat Detail</a>
                                                     <br>
                                                     <br>
                                                 </div>

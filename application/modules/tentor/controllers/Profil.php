@@ -9,7 +9,6 @@ class Profil extends CI_Controller
     {
         parent::__construct();
         $this->load->model('tentor/Profil_model', 'pm');
-        $this->load->model('tentor/alamat_model');
     }
 
 
@@ -18,18 +17,11 @@ class Profil extends CI_Controller
         $id_user = $this->session->userdata('id_user');
         // $user = $this->Crud_model->listingOne('tbl_user', 'id_user', $id_user);
         $tentor = $this->pm->listingOne($id_user);
-        $kompetensi = $this->pm->listingKompetensi($id_user);
-        $alamat  = $this->pm->listingAlamat($id_user);
-
-
-
 
         $data = [
-            'title'         => $tentor->nama_lengkap,
-            'tentor'        => $tentor,
-            'alamat'        => $alamat,
-            'kompetensi'    => $kompetensi,
-            'content'       => 'tentor/profil/index'
+            'title'     => $tentor->nama_lengkap,
+            'tentor'    => $tentor,
+            'content'   => 'tentor/profil/index'
         ];
 
         $this->load->view('layout/wrapper', $data, FALSE);
@@ -42,6 +34,7 @@ class Profil extends CI_Controller
 
         $valid = $this->form_validation;
         $valid->set_rules('nama_lengkap', 'Nama Lengkap', 'required', ['required' => '%s tidak boleh kosong']);
+        $valid->set_rules('alamat', 'Alamat', 'required', ['required' => '%s tidak boleh kosong']);
 
 
         if ($valid->run()) {
@@ -72,8 +65,6 @@ class Profil extends CI_Controller
                         'id_kota'       => $i->post('id_kota'),
                         'id_provinsi'   => $i->post('id_provinsi'),
                         'id_kecamatan'  => $i->post('id_kecamatan'),
-                        'rekening'      => $i->post('rekening'),
-                        //'gender'        => $i->post('gender'),
                         'alamat'        => $i->post('alamat'),
                         'about'         => $i->post('about'),
                         'fb'            => $i->post('fb'),
@@ -101,7 +92,6 @@ class Profil extends CI_Controller
                     'id_kota'       => $i->post('id_kota'),
                     'id_provinsi'   => $i->post('id_provinsi'),
                     'id_kecamatan'  => $i->post('id_kecamatan'),
-                    'rekening'      => $i->post('rekening'),
                     'alamat'        => $i->post('alamat'),
                     'gender'        => $i->post('gender'),
                     'about'         => $i->post('about'),

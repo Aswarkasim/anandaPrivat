@@ -4,6 +4,7 @@ $nama_user = "";
 $email = "";
 $foto = "";
 $role = "";
+$banner = "";
 if (($this->session->userdata('id_user')) != "") {
     $id_user = $this->session->userdata('id_user');
     $user = $this->Crud_model->listingOne('tbl_user', 'id_user', $id_user);
@@ -28,10 +29,18 @@ if (($this->session->userdata('id_user')) != "") {
     <div id="wt-verticalscrollbar" class="wt-verticalscrollbar">
         <div class="wt-companysdetails wt-usersidebar">
             <figure class="wt-companysimg">
-                <img src="<?= base_url('assets/uploads/banners/' . $tentor->banner)  ?>" alt="img description">
+                <img src="<?php if ($tentor->banner == "") {
+                                echo base_url('assets/uploads/banners/default.jpg');
+                            } else {
+                                base_url('assets/uploads/banners/' . $tentor->banner);
+                            } ?>" alt="img description">
             </figure>
             <div class="wt-companysinfo">
-                <figure><img src="<?= base_url('assets/uploads/images/' . $tentor->foto)  ?>" alt="img description"></figure>
+                <figure><img src="<?php if ($tentor->foto == "") {
+                                        echo base_url('assets/uploads/banners/default.jpg');
+                                    } else {
+                                        echo base_url('assets/uploads/images/' . $tentor->foto);
+                                    } ?>" alt="img description"></figure>
                 <div class="wt-title">
                     <h2><a href="javascript:void(0);"> <?= $nama_user ?></a></h2>
                     <span><?= $role ?></span>

@@ -17,13 +17,19 @@ class Alamat extends CI_Controller
         $id_user = $this->session->userdata('id_user');
         $alamat  = $this->alamat_model->listingOne($id_user);
 
+        if (empty($alamat)) {
 
-        $data = [
-            'content'   => 'tentor/profil/alamat',
-            'alamat'    => $alamat
-        ];
+            redirect('tentor/alamat/add', 'refresh');
+        } else {
 
-        $this->load->view('layout/wrapper', $data);
+
+            $data = [
+                'alamat'    => $alamat,
+                'content'   => 'tentor/profil/editalamat'
+            ];
+
+            $this->load->view('layout/wrapper', $data);
+        }
     }
 
 
@@ -34,6 +40,7 @@ class Alamat extends CI_Controller
         $id_user = $this->session->userdata('id_user');
         $alamat  = $this->Crud_model->listingOne('tbl_alamat', 'id_user', $id_user);
 
+
         $valid = $this->form_validation;
 
         $valid->set_rules('alamat', 'Alamat', 'required', ['required' => 'alamat tidak boleh kosong']);
@@ -41,7 +48,7 @@ class Alamat extends CI_Controller
         if ($valid->run() === false) {
 
             $data = [
-                'content'   => 'tentor/profil/editalamat',
+                'content'   => 'tentor/profil/edit',
                 'alamat'    => $alamat,
                 'provinsi'  =>  $this->alamat_model->fetch_provinsi()
             ];
