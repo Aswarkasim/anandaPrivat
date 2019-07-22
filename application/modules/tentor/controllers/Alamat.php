@@ -90,8 +90,8 @@ class Alamat extends CI_Controller
         } else {
             $i = $this->input;
             $data = [
-                'id_user' => $this->session->userdata('id_user'),
-                'id_provinsi' => $i->post('provinsi'),
+                'id_user'       => $this->session->userdata('id_user'),
+                'id_provinsi'   => $i->post('provinsi'),
                 'id_kabupaten' => $i->post('kabupaten'),
                 'id_kecamatan' => $i->post('kecamatan'),
                 'alamat'       => $i->post('alamat')
