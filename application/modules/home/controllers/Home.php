@@ -17,4 +17,18 @@ class Home extends CI_Controller
 
         $this->load->view('layout/wrapper', $data, FALSE);
     }
+
+    public function allkursus()
+    {
+        $kursus = $this->Crud_model->listingOneAll('tbl_kursus', 'is_aktif', '1');
+        $data = [
+            'title'    => 'Ananda Private',
+            'add'      => 'userAdd',
+            'edit'      => 'userEdit',
+            'kursus'    => $kursus,
+            'content'   => 'home/home/allkursus'
+        ];
+
+        $this->load->view('layout/wrapper', $data, FALSE);
+    }
 }
