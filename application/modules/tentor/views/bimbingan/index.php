@@ -26,16 +26,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th>1</th>
-                                            <td>Renang</td>
-                                            <td>SMP Kelas 1</td>
-                                            <td>Dirga Pratama</td>
-                                            <td>6x pertemuan</td>
-                                            <td>Minggu</td>
-                                            <td>08.00-09.00</td>
-                                            <td><a href="<?= base_url() ?>tentor/bimbingan/detail">Detail</a></td>
-                                        </tr>
+                                        <?php $no = 1;
+                                        foreach ($bimbingan as $row) { ?>
+                                            <tr>
+                                                <th>1</th>
+                                                <td>Renang</td>
+                                                <td>SMP Kelas 1</td>
+                                                <td>Dirga Pratama</td>
+                                                <td>6x pertemuan</td>
+                                                <td>Minggu</td>
+                                                <td>08.00-09.00</td>
+                                                <td><a href="<?= base_url() ?>tentor/bimbingan/detail">Detail</a></td>
+                                            </tr>
+                                            <?php $no++;
+                                        } ?>
                                     </tbody>
                                 </table>
                             </div>
