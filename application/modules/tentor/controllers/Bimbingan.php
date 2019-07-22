@@ -15,28 +15,24 @@ class Bimbingan extends CI_Controller
 
     public function index()
     {
-
-        $id_user = $this->session->userdata('id_user');
-        $bimbingan = $this->PM->listingBimbingan('tbl_online.id_tentor', $id_user)->result();
-
-
+        $id_tentor = $this->session->userdata('id_user');
+        $bimbingan = $this->PM->listingBimbingan('tbl_online.id_tentor', $id_tentor)->result();
+        // print_r($bimbingan)
         $data = [
-            'title'     => "Bimbingan ",
-            'bimbingan'      =>  $bimbingan,
+            'title'     => 'Siswa bimbingan',
+            'bimbingan'  => $bimbingan,
             'content'   => 'tentor/bimbingan/index'
         ];
 
         $this->load->view('layout/wrapper', $data, FALSE);
     }
-    public function detail()
+    public function detail($id_online)
     {
-
-        $id_user = $this->session->userdata('id_user');
-        $user = $this->Crud_model->listingOne('tbl_tentor', 'id_tentor', $id_user);
+        $online = $this->PM->listingBimbingan('tbl_online.id_online', $id_online)->row();
 
         $data = [
-            'title'     => "Detail Bimbingan",
-            'profil'      =>  $user,
+            'title'     => 'Bimbingan || ' . $online->nama_lengkap,
+            'online'    => $online,
             'content'   => 'tentor/bimbingan/detail'
         ];
 

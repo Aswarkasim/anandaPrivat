@@ -8,11 +8,10 @@
                         <div class="row">
                             <div class="wt-proposalholder">
                                 <div class="wt-proposalhead">
-                                    <h2>MATEMATIKA</h2>
+                                    <h2><?= $online->nama_kursus ?></h2>
                                     <ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
-                                        <li><span><i class="fa fa-graduation-cap" aria-hidden="true"> Aswar Kasim</i></span></li>
-                                        <li><span><i class="fa fa-phone" aria-hidden="true"></i> 081234567890</i></span></li>
-                                        <li><span><i class="fa fa-map-marker" aria-hidden="true"> Jln. Antang No.999</i></span></li>
+                                        <li><span><i class="fa fa-graduation-cap" aria-hidden="true"> </i><?= $online->nama_lengkap ?></span></li>
+                                        <li><span><i class="fa fa-graduation-cap" aria-hidden="true"> </i><?= $online->alamat ?></span></li>
                                     </ul>
                                 </div>
                                 <div class="wt-btnarea text-center">
@@ -57,13 +56,12 @@
                                         <div class="wt-companysinfo">
                                             <figure><img src="<?= base_url() ?>assets/images/company/img-01.png" alt="img description"></figure>
                                             <div class="wt-title">
-                                                <i class="fa fa-male mr-1" style="color:dodgerblue" aria-hidden="true"></i> Pria
-                                                <h2>Sultan Dirga Pratama</h2>
+                                                <h2><?= $online->nama_lengkap ?></h2>
                                             </div>
                                             <ul class="wt-postarticlemeta">
                                                 <li>
                                                     <a href="javascript:void(0);">
-                                                        <span>Dosen Universitas Negeri Makassar</span>
+                                                        <span><?= $online->gender ?></span>
                                                     </a>
                                                 </li>
                                                 <li>
@@ -82,15 +80,15 @@
                                     <div class="wt-companysinfo" style="border-left:solid 5px lightgreen">
                                         <br><br><br>
                                         <div class="wt-title pr-4">
-                                            <h2 class="text-white"><b>PAKET 1</b><i class="fa fa-check-circle text-white ml-2 float-left"></i></h2>
+                                            <h2 class="text-white"><b><?= $online->nama_paket ?></b><i class="fa fa-check-circle text-white ml-2 float-left"></i></h2>
                                         </div>
                                         <ul class="wt-postarticlemeta">
                                             <li>
                                                 <i class=" lnr lnr-clock text-white"></i>
-                                                <span class="text-white">Senin, Rabu, &amp; Jumat</span>
+                                                <span class="text-white"><?= $online->hari ?></span>
                                             </li>
                                             <li>
-                                                <span class="text-white">12x pertemuan</span>
+                                                <span class="text-white"><?= $online->jumlah_pertemuan ?>x pertemuan</span>
 
                                             </li>
                                         </ul>
@@ -101,12 +99,12 @@
                                     <div class="wt-companysinfo" style="border-left:solid 5px lightgreen">
                                         <br><br><br>
                                         <div class="wt-title pr-4">
-                                            <h2 class="text-white"><b>Pagi</b><i class="fa fa-check-circle text-white ml-2 float-left"></i></h2>
+                                            <h2 class="text-white"><b><?= $online->nama_waktu ?></b><i class="fa fa-check-circle text-white ml-2 float-left"></i></h2>
                                         </div>
                                         <ul class="wt-postarticlemeta">
                                             <li>
                                                 <i class=" lnr lnr-clock text-white"></i>
-                                                <span class="text-white">08.30 - 09.30</span>
+                                                <span class="text-white"><?= $online->awal ?> - <?= $online->akhir ?></span>
                                             </li>
                                         </ul>
                                     </div>
@@ -117,10 +115,10 @@
                                         <br><br><br>
                                         <ul class="wt-postarticlemeta">
                                             <div class="wt-title pr-4">
-                                                <h2 class="text-white"><b>SMA</b><i class="fa fa-check-circle text-white ml-2 float-left"></i></h2>
+                                                <h2 class="text-white"><b><?= $online->nama_jenjang ?></b><i class="fa fa-check-circle text-white ml-2 float-left"></i></h2>
                                             </div>
                                             <li>
-                                                <span class=" text-white"><b>KELAS 1<br></span>
+                                                <span class=" text-white"><b><?= $online->nama_tingkat ?><br></span>
                                             </li>
                                         </ul>
                                     </div>

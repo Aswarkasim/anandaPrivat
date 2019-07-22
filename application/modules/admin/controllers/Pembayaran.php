@@ -42,7 +42,7 @@ class Pembayaran extends CI_Controller
                     $this->session->set_flashdata('msg_er', 'Kelas telah ditambah');
                 } else if ($online == "") {
                     $dataOnline = [
-                        'id_online'     => 'OL#' . random_string('numeric', '8'),
+                        'id_online'     => 'OL' . random_string('numeric', '8'),
                         'id_order'      => $pembayaran->id_order,
                         'id_siswa'      => $order->id_siswa,
                         'id_kursus'     => $order->id_kursus,
