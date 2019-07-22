@@ -46,7 +46,7 @@ class Kursus extends CI_Controller
     {
         $this->load->helper('string');
         $isi = $this->input->post('isi');
-
+        ////ini kutambah
 
         $data = [
             'id_pesan'      => 'PSN' . random_string('numeric', '8'),
