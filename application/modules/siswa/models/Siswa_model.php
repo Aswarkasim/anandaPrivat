@@ -102,4 +102,15 @@ class Siswa_model extends CI_Model
             ->where($field, $where);
         return $this->db->get();
     }
+    public function listingNotif($field, $where)
+    {
+        $this->db->select('tbl_notif.*,
+                        tbl_siswa.nama_lengkap,
+                        tbl_user.nama_user as nama_admin')
+            ->from('tbl_notif')
+            ->join('tbl_user', 'tbl_user.id_user = tbl_notif.id_admin', 'LEFT')
+            ->join('tbl_siswa', 'tbl_siswa.id_siswa = tbl_notif.id_user', 'LEFT')
+            ->where($field, $where);
+        return $this->db->get();
+    }
 }

@@ -16,7 +16,6 @@ if (($this->session->userdata('id_user')) != "") {
 }
 
 ?>
-
 <!--Sidebar Start-->
 <div id="wt-sidebarwrapper" class="wt-sidebarwrapper">
     <div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
@@ -77,9 +76,9 @@ if (($this->session->userdata('id_user')) != "") {
                 ?>
 
                 <li>
-                    <a href="<?= base_url('siswa/pesan') ?>">
+                    <a href="<?= base_url('siswa/notif') ?>">
                         <i class="ti-envelope"></i>
-                        <span>Pesan</span>
+                        <span>Notifikasi</span>
                     </a>
                 </li>
                 <li class="menu-item-has-children">
