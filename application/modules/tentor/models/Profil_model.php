@@ -35,7 +35,7 @@ class Profil_model extends CI_Model
         return $query->result();
     }
 
-    public function listingBimbingan($field, $where)
+    public function listingBimbingan($field, $where, $limit = null)
     {
         $this->db->select('tbl_online.*,
                         tbl_siswa.nama_lengkap,
@@ -65,7 +65,8 @@ class Profil_model extends CI_Model
             ->join('tbl_tingkat', 'tbl_tingkat.id_tingkat = tbl_online.id_tingkat', 'LEFT')
             ->join('tbl_siswa', 'tbl_siswa.id_siswa = tbl_online.id_siswa', 'LEFT')
             ->join('tbl_waktu', 'tbl_waktu.id_waktu = tbl_online.id_waktu', 'LEFT')
-            ->where($field, $where);
+            ->where($field, $where)
+            ->limit($limit);
         return $this->db->get();
     }
 }

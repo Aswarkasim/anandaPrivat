@@ -8,19 +8,21 @@ class Profil extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('tentor/Profil_model', 'pm');
+        $this->load->model('tentor/Profil_model', 'PM');
     }
 
 
     public function index()
     {
-        $id_user = $this->session->userdata('id_user');
+        $id_tentor = $this->session->userdata('id_user');
         // $user = $this->Crud_model->listingOne('tbl_user', 'id_user', $id_user);
-        $tentor = $this->pm->listingOne($id_user);
+        $tentor = $this->PM->listingOne($id_tentor);
+        $bimbingan = $this->PM->listingBimbingan('tbl_online.id_tentor', $id_tentor, '3')->result();
 
         $data = [
             'title'     => $tentor->nama_lengkap,
             'tentor'    => $tentor,
+            'bimbingan' => $bimbingan,
             'content'   => 'tentor/profil/index'
         ];
 
