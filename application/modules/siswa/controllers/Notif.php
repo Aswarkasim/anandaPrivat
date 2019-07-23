@@ -38,7 +38,7 @@ class Notif extends CI_Controller
             'notif'     => $notif,
             'content'   => 'siswa/notif/detail'
         ];
-
+        //lorem
         $this->load->view('layout/wrapper', $data, FALSE);
     }
 }
