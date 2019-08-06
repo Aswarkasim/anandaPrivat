@@ -1,23 +1,27 @@
+<?php
+$konfigurasi = $this->Crud_model->listingOne('tbl_konfigurasi', 'id_konfigurasi', '1');
+
+?>
+
 <footer id="wt-footer" class="wt-footer wt-haslayout">
     <div class="wt-footerholder wt-haslayout">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                     <div class="wt-footerlogohold">
-                        <strong class="wt-logo"><a href="index.html"><img src="<?= base_url('assets/')  ?>images/flogo.png" alt="company logo here"></a></strong>
+                        <strong class="wt-logo"><a href="index.html"><img src="<?= base_url('assets/uploads/konfigurasi/' . $konfigurasi->logo) ?>" alt="company logo here"></a></strong>
                         <div class="wt-description">
-                            <p>Dotem eiusmod tempor incune utnaem labore etdolore maigna aliqua enim poskina ilukita ylokem lokateise ination voluptate velit esse cillum dolore eu fugiat nulla pariatur lokaim urianewce <a href="javascript:void(0);">more...</a></p>
+                            <p><?= character_limiter($konfigurasi->tentang, '200') ?> <a href="">lanjut...</a></p>
                         </div>
                         <ul class="wt-socialiconssimple wt-socialiconfooter">
-                            <li class="wt-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook-f"></i></a></li>
-                            <li class="wt-twitter"><a href="javascript:void(0);"><i class="fab fa-twitter"></i></a></li>
-                            <li class="wt-youtube"><a href="javascript:void(0);"><i class="fab fa-youtube"></i></a></li>
-                            <li class="wt-instagram"><a href="javascript:void(0);"><i class="fab fa-instagram"></i></a></li>
-                            <li class="wt-googleplus"><a href="javascript:void(0);"><i class="fab fa-google-plus-g"></i></a></li>
+                            <li class="wt-facebook"><a target="blank" href="<?= $konfigurasi->fb ?>"><i class="fa fa-facebook-f"></i></a></li>
+                            <li class="wt-twitter"><a target="blank" href="<?= $konfigurasi->tw ?>"><i class="fab fa-twitter"></i></a></li>
+                            <li class="wt-youtube"><a target="blank" href="<?= $konfigurasi->yt ?>"><i class="fab fa-youtube"></i></a></li>
+                            <li class="wt-instagram"><a target="blank" href="<?= $konfigurasi->ig ?>"><i class="fab fa-instagram"></i></a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+                <!-- <div class="col-12 col-sm-6 col-md-3 col-lg-3">
                     <div class="wt-footercol wt-widgetcompany">
                         <div class="wt-fwidgettitle">
                             <h3>Company</h3>
@@ -46,7 +50,7 @@
                             <li class="wt-viewmore"><a href="javascript:void(0);">+ View All</a></li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -55,10 +59,7 @@
             <div class="row justify-content-md-center">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 push-lg-1">
                     <div class="wt-companyinfo">
-                        <span><a href="javascript:void(0);">New @ Worktern?</a> Dotem eiusmod tempor incune utnaem labore etdolore.</span>
-                    </div>
-                    <div class="wt-fbtnarea">
-                        <a href="javascript:void(0)" class="wt-btn">Join Now</a>
+                        <span><a href="javascript:void(0);"><?= $konfigurasi->email ?></a></span>
                     </div>
                 </div>
             </div>
@@ -68,13 +69,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <p class="wt-copyrights"><span>Worktern.</span> © 2018 All Rights Reserved.</p>
+                    <p class="wt-copyrights"><span>ScrollUp Studio</span> © 2018 All Rights Reserved.</p>
                     <nav class="wt-addnav">
                         <ul>
-                            <li><a href="javascript:void(0);">News</a></li>
-                            <li><a href="javascript:void(0);">Terms &amp; Conditions</a></li>
-                            <li><a href="javascript:void(0);">Privacy Policy</a></li>
-                            <li><a href="javascript:void(0);">Career</a></li>
+                            <li><a href="javascript:void(0);">Developer Team</a></li>
                         </ul>
                     </nav>
                 </div>

@@ -15,9 +15,27 @@ class Pembayaran extends CI_Controller
 
     public function index()
     {
-        $pembayaran = $this->Crud_model->listing('tbl_pembayaran');
+        // $provinsi = $this->Crud_model->listing('tbl_provinsi');
+
+        // Config
+        // $this->db->like('nama_provinsi', $search);
+        $this->db->from('tbl_pembayaran');
+
+        $config['base_url']     = base_url('admin/pembayaran/index');
+        $config['total_rows']   = $this->db->count_all_results();
+        $config['per_page']     = 5;
+
+        // Initialize
+        $pagination = $this->pagination->initialize($config);
+
+
+        $start      = $this->uri->segment(4);
+
+        $pembayaran = $this->Crud_model->listing('tbl_pembayaran', $config['per_page'], $start);
         $data = [
             'title'         => 'Manajemen Pembayaran',
+            'pagination'=> $pagination,
+            'start'     => $start,
             'pembayaran'    => $pembayaran,
             'content'   => 'admin/pembayaran/index'
         ];
@@ -27,6 +45,8 @@ class Pembayaran extends CI_Controller
 
     public function detail($id_pembayaran)
     {
+        $dataRead = ['is_read'   => 1];
+        $this->Crud_model->edit('tbl_pembayaran', 'id_pembayaran', $id_pembayaran, $dataRead);
         $pembayaran = $this->Crud_model->listingOne('tbl_pembayaran', 'id_pembayaran', $id_pembayaran);
 
         $abcd = $this->input->post('is_valid');
@@ -83,8 +103,6 @@ class Pembayaran extends CI_Controller
 
     function konfirmasi($id_pembayaran)
     {
-
-
         $pembayaran = $this->Crud_model->listingOne('tbl_pembayaran', 'id_pembayaran', $id_pembayaran);
         $order = $this->Crud_model->listingOne('tbl_order', 'id_order', $pembayaran->id_order);
         $valid = $this->input->post('is_valid');

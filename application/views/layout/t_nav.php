@@ -32,7 +32,7 @@ if (($this->session->userdata('id_user')) != "") {
                 <img src="<?php if ($tentor->banner == "") {
                                 echo base_url('assets/uploads/banners/default.jpg');
                             } else {
-                                base_url('assets/uploads/banners/' . $tentor->banner);
+                                echo base_url('assets/uploads/banners/' . $tentor->banner);
                             } ?>" alt="img description">
             </figure>
             <div class="wt-companysinfo">

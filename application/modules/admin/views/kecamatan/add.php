@@ -28,6 +28,16 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label for=""><strong>ZONASI</strong></label>
+                                        <select name="id_zonasi" id="" class="form-control">
+                                            <option value="">--Pilih Zonasi--</option>
+                                            <?php foreach ($zonasi as $row) { ?>
+                                                <option value="<?= $row->id_zonasi ?>"><?= $row->nama_zonasi ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label for=""><strong>NAMA KABUPATEN/KOTA</strong></label>
                                         <input type="text" name="nama_kecamatan" class="form-control" placeholder="NAMA KECAMATAN">
                                     </div>

@@ -12,10 +12,28 @@ class Paket extends CI_Controller
 
     function index()
     {
-        $paket = $this->Crud_model->listing('tbl_paket');
+        // $provinsi = $this->Crud_model->listing('tbl_provinsi');
+
+        // Config
+        // $this->db->like('nama_provinsi', $search);
+        $this->db->from('tbl_paket');
+
+        $config['base_url']     = base_url('admin/paket/index');
+        $config['total_rows']   = $this->db->count_all_results();
+        $config['per_page']     = 5;
+
+        // Initialize
+        $pagination = $this->pagination->initialize($config);
+
+
+        $start      = $this->uri->segment(4);
+
+        $paket = $this->Crud_model->listing('tbl_paket', $config['per_page'], $start);
         $data = [
             'title'   => 'Registrasi || Ananda Private',
             'add'       => 'admin/paket/add',
+            'pagination'=> $pagination,
+            'start'     => $start,
             'paket'  => $paket,
             'content'   => 'admin/paket/index'
         ];

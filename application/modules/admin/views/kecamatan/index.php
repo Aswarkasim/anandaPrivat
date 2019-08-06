@@ -1,57 +1,40 @@
-<section class="wt-haslayout">
-    <div class="row">
-        <div class="col-md-12">
-
-            <div class="wt-haslayout wt-dbsectionspace">
-                <div class="wt-dashboardbox wt-dashboardtabsholder">
-
-
-
-                    <div class="wt">
-
-                        <div class="container-fluid"><br><br>
-                            <p>
-                                <!-- Button trigger modal -->
-                                <a href="<?= base_url($add) ?>" class="btn btn-primary">
-                                    <i class="fa fa-plus"></i> Tambah
-                                </a>
-
-                            </p>
-
-                            <table class="table DataTables">
-                                <thead style="background-color:#ff5851" class="text-white">
-                                    <tr>
-                                        <th width="100px">No</th>
-                                        <th>KECAMATAN</th>
-                                        <th>KABUPATEN</th>
-                                        <th width="100px">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $no = 1;
-                                    foreach ($kecamatan as $row) { ?>
-                                        <tr>
-                                            <td><?= $no ?></td>
-                                            <td><?= $row->nama_kecamatan ?></td>
-                                            <td><?= $row->nama_kabupaten ?></td>
-                                            <td>
-                                                <a href="<?= base_url('admin/kecamatan/edit/' . $row->id_kecamatan) ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                                                <a href="<?= base_url('admin/kecamatan/delete/' . $row->id_kecamatan) ?>" class="btn btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
-                                            </td>
-                                        </tr>
-                                        <?php $no++;
-                                    } ?>
-                                </tbody>
-                            </table>
-
-                            <br><br>
-                        </div>
-
-                    </div>
+<div class="wt-dashboardbox wt-dashboardinvocies">
+    <div class="wt-dashboardboxtitle wt-titlewithsearch">
+        <h2>Kecamatan</h2>
+        <a style="float: right; padding: 0 17px;" href="<?= base_url($add) ?>" class="ml-3 wt-btn"><i class="fas fa-plus"></i> Tambah</a>
+        <form class="wt-formtheme wt-formsearch">
+            <fieldset>
+                <div class="form-group">
+                    <input type="text" name="SearchKecamatan" class="form-control" placeholder="Search Here">
+                    <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
                 </div>
-            </div>
-
-        </div>
-
+            </fieldset>
+        </form>
     </div>
-</section>
+    <div class="wt-dashboardboxcontent wt-categoriescontentholder wt-categoriesholder">
+        <table class="wt-tablecategories">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nama Kecamatan</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($kecamatan as $row) { ?>
+                    <tr>
+                        <td><span class="bt-content"><?= ++$start; ?></span></td>
+                        <td><span class="bt-content"><?= $row->nama_kecamatan; ?></span></td>
+                        <td><span class="bt-content">
+                                <div class="wt-actionbtn">
+                                    <a href="<?= base_url('admin/kecamatan/edit/' . $row->id_kecamatan) ?>" class="wt-addinfo wt-skillsaddinfo"><i class="far fa-edit"></i></a>
+                                    <a href="<?= base_url('admin/kecamatan/delete/' . $row->id_kecamatan) ?>" class="wt-deleteinfo"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                            </span></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+        <?= $this->pagination->create_links(); ?>
+    </div>
+</div>

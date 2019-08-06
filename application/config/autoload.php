@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $autoload['packages'] = array();
 
 
-$autoload['libraries'] = array('ssp', 'database', 'email', 'session', 'form_validation', 'upload');
+$autoload['libraries'] = array('ssp', 'database', 'email', 'session', 'form_validation', 'upload', 'pagination');
 
 $autoload['drivers'] = array();
 

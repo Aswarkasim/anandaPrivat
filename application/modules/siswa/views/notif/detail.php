@@ -19,15 +19,10 @@
                                         <div class="wt-haslayout wt-dbsectionspace">
                                             <div class="wt-dashboardbox ">
                                                 <div class="wt-dashboardboxtitle wt-yeartag">
-                                                    <h2>Anda Mendapat Pesanan Kursus Matematika</h2>
+                                                    <h2><?= $notif->judul ?></h2>
                                                 </div>
                                                 <div class="wt-dashboardboxcontent">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus numquam aliquid quisquam. Ullam voluptatem at vitae blanditiis similique quaerat ex eos, non fugit aspernatur nam. Ad natus ipsum esse animi!
-                                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni similique officia architecto ipsa facere? Magni consectetur ea maiores aliquam velit nostrum officiis, aspernatur eius consequatur incidunt praesentium modi delectus saepe.
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus numquam aliquid quisquam. Ullam voluptatem at vitae blanditiis similique quaerat ex eos, non fugit aspernatur nam. Ad natus ipsum esse animi!
-                                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni similique officia architecto ipsa facere? Magni consectetur ea maiores aliquam velit nostrum officiis, aspernatur eius consequatur incidunt praesentium modi delectus saepe.
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus numquam aliquid quisquam. Ullam voluptatem at vitae blanditiis similique quaerat ex eos, non fugit aspernatur nam. Ad natus ipsum esse animi!
-                                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni similique officia architecto ipsa facere? Magni consectetur ea maiores aliquam velit nostrum officiis, aspernatur eius consequatur incidunt praesentium modi delectus saepe.
+                                                    <?= $notif->isi ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -35,7 +30,7 @@
                                 </div>
 
                                 <div class="form-group wt-btnarea mt-4">
-                                    <a href="<?= base_url() ?>siswa/pesan" class="wt-btn">Kembali</a>
+                                    <a href="<?= base_url() ?>siswa/notif" class="wt-btn">Kembali</a>
                                 </div>
                             </div>
                         </div>

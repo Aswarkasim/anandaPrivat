@@ -9,7 +9,7 @@
 					<div class="wt-tabscontenttitle">
 						<h2>Alamat Anda</h2>
 					</div>
-					<form method="post" action="<?= base_url('tentor/alamat'); ?>" class="wt-formtheme wt-userform">
+					<form method="post" action="<?= base_url('tentor/alamat/add'); ?>" class="wt-formtheme wt-userform">
 						<fieldset>
 							<div style="width: 100%;" class="form-group form-group-half">
 								<span class="wt-select">
@@ -39,7 +39,7 @@
 							<div style="width: 100%;" class="form-group form-group-half">
 								<input type="textarea" name="alamat" class="form-control" placeholder="ALAMAT">
 							</div>
-							
+
 							<div class="form-group">
 								<button type="submit" class="wt-btn">tes</button>
 							</div>
@@ -57,32 +57,32 @@
 		// In your Javascript (external .js resource or <script> tag)
 		$(document).ready(function() {
 
-			$('#provinsi').change(function(){
-				var	id_provinsi = $("#provinsi").val();
-				if(id_provinsi != '')
-				{
+			$('#provinsi').change(function() {
+				var id_provinsi = $("#provinsi").val();
+				if (id_provinsi != '') {
 					$.ajax({
-						url:"../alamat/fetch_kabupaten",
-						method:"POST",
-						data:{id_provinsi:id_provinsi},
-						success:function(data)
-						{
+						url: "../alamat/fetch_kabupaten",
+						method: "POST",
+						data: {
+							id_provinsi: id_provinsi
+						},
+						success: function(data) {
 							$('#kabupaten').html(data);
 						}
 					})
 				}
 			});
 
-			$('#kabupaten').change(function(){
-				var	id_kabupaten = $("#kabupaten").val();
-				if(id_kabupaten != '')
-				{
+			$('#kabupaten').change(function() {
+				var id_kabupaten = $("#kabupaten").val();
+				if (id_kabupaten != '') {
 					$.ajax({
-						url:"../alamat/fetch_kecamatan",
-						method:"POST",
-						data:{id_kabupaten:id_kabupaten},
-						success:function(data)
-						{
+						url: "../alamat/fetch_kecamatan",
+						method: "POST",
+						data: {
+							id_kabupaten: id_kabupaten
+						},
+						success: function(data) {
 							$('#kecamatan').html(data);
 						}
 					})
@@ -90,5 +90,4 @@
 			});
 
 		});
-		
 	</script>

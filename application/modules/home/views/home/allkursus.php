@@ -31,7 +31,8 @@
 						<!--Categories End-->
 
 						<div class="wt-articletabshold">
-							<ul class="wt-navarticletab nav navbar-nav">
+							<!-- <ul class="wt-navarticletab nav navbar-nav">
+
 								<li class="nav-item">
 									<a class="active" id="all-tab" data-toggle="tab" href="#semua">Semua</a>
 								</li>
@@ -44,7 +45,7 @@
 								<li class="nav-item">
 									<a id="musik-tab" data-toggle="tab" href="#musik">Musik</a>
 								</li>
-							</ul>
+							</ul> -->
 							<div class="tab-content wt-haslayout">
 								<div class="wt-contentarticle tab-pane active fade show" id="semua">
 									<div class="row">
@@ -64,6 +65,10 @@
 													</div>
 												</div>
 											<?php  } ?>
+											<nav class="wt-pagination wt-savepagination">
+												<?= $this->pagination->create_links(); ?>
+											</nav>
+
 
 											<div class="col-12 col-sm-12 col-md-12 col-lg-12 float-left">
 												<div class="wt-btnarea">

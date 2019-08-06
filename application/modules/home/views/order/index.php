@@ -115,25 +115,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-3 text-center">
-                                        <label for="" class="pt-3">
-                                            <h4>TENTOR</h4>
-                                        </label>
-                                    </div>
-                                    <div class="col-9 mx-auto">
-                                        <span class="wt-select">
-                                            <select name="id_tentor">
-                                                <option value="none">--- Pilih Paket ---</option>
-                                                <?php foreach ($tentor as $row) { ?>
-                                                    <option value="<?= $row->id_tentor ?>"><?= $row->nama_lengkap ?></option>
-                                                <?php  } ?>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="wt-btnarea text-center">
                                 <button class="wt-btn" type="submit"><i class="fa fa-shopping-cart mr-2"></i> order</button>
                             </div>

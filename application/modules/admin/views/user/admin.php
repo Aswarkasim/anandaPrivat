@@ -1,97 +1,60 @@
-<section class="wt-haslayout">
-    <div class="row">
-        <div class="col-md-12">
-
-            <div class="wt-haslayout wt-dbsectionspace">
-                <div class="wt-dashboardbox wt-dashboardtabsholder">
-
-
-
-                    <div class="wt">
-
-                        <div class="container-fluid"><br><br>
-                            <p>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddRoleModal">
-                                    <i class="fa fa-plus"></i> Tambah
-                                </button>
-
-                            </p>
-
-                            <table class="table table-hover DataTables">
-                                <thead>
-                                    <tr>
-                                        <th width="50px">No</th>
-                                        <th width="50px">FOTO</th>
-                                        <th>EMAIL</th>
-                                        <th>ROLE</th>
-                                        <th>STATUS</th>
-                                        <th>DATE CREATED</th>
-                                        <th>ACTION</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $no = 1;
-                                    foreach ($user as $row) { ?>
-                                        <tr>
-                                            <td><?= $no; ?></td>
-                                            <td>
-                                                <img src="<?php if ($row->foto) {
-                                                                echo base_url('assets/uploads/images/' . $row->foto);
-                                                            } else {
-                                                                echo base_url('assets/uploads/images/default.jpg');
-                                                            } ?>" alt="">
-                                            </td>
-                                            <td><?= $row->nama_user; ?></td>
-                                            <td><?= $row->role; ?></td>
-                                            <td>
-                                                <?php
-                                                if (($row->is_aktif) == 1) {
-                                                    echo '<span class="btn btn-success">Aktif</span>';
-                                                } else {
-                                                    echo '<span class="btn btn-danger">Tidak Aktif</span>';
-                                                }
-                                                ?>
-                                            </td>
-                                            <td><?= $row->date_created; ?></td>
-                                            <td></td>
-                                        </tr>
-                                        <?php $no++;
-                                    } ?>
-                                </tbody>
-                            </table>
-
-                            <br><br>
-                        </div>
-
-                    </div>
+<div class="wt-dashboardbox wt-dashboardinvocies">
+    <div class="wt-dashboardboxtitle wt-titlewithsearch"><h2>Manajemen User</h2>
+        <form style="display: inline;" class="wt-formtheme wt-formsearch" action="#" method="post">
+            <fieldset>
+                <div class="form-group">
+                    <input type="text" name="search" id="search" class="form-control" placeholder="Search Here" autocomplete="off" autofocus>
+                    <button class="wt-searchgbtn" type="submit" name="submit" value="submit"><i class="lnr lnr-magnifier"></i></button>
                 </div>
-            </div>
-
-        </div>
-
+            </fieldset>
+        </form>
     </div>
-</section>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="AddRoleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
+    <div class="wt-dashboardboxcontent wt-categoriescontentholder wt-categoriesholder">
+        <table class="wt-tablecategories">
+            <thead>
+                <tr>
+                    <th width="50">#</th>
+                    <th width="100">Foto</th>
+                    <th>Nama User</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Date Created</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($user as $row){ ?>
+                <tr>
+                    <td><span class="bt-content"><?= ++$start; ?></span></td>
+                    <td><span class="bt-content">
+                        <img src="<?php if ($row->foto) {
+                                    echo base_url('assets/uploads/images/' . $row->foto);
+                                } else {
+                                    echo base_url('assets/uploads/images/default.jpg');
+                                } ?>" alt="">
+                    </span></td>
+                    <td><span class="bt-content"><?= $row->nama_user; ?></span></td>
+                    <td><span class="bt-content"><?= $row->email; ?></span></td>
+                    <td><span class="bt-content"><?= $row->role; ?></span></td>
+                    <td><span class="bt-content">
+                        <?php
+                            if (($row->is_aktif) == 1) {
+                                echo '<span class="btn btn-success">Aktif</span>';
+                            } else {
+                                echo '<span class="btn btn-danger">Tidak Aktif</span>';
+                            }
+                        ?>
+                    </span></td>
+                    <td><span class="bt-content"><?= $row->date_created; ?></span></td>
+                    <td><span class="bt-content">
+                        <a href="<?= base_url('admin/user/edit/' . $row->id_user) ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                        <a href="<?= base_url('admin/user/delete/' . $row->id_user) ?>" class="btn btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
+                    </span></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+        <?= $this->pagination->create_links(); ?>
     </div>
 </div>

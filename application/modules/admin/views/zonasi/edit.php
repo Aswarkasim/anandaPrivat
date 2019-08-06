@@ -23,6 +23,17 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <span class="wt-select">
+                                            <select class="select2" name="id_provinsi" id="provinsi">
+                                                <option value="">Provinsi</option>
+                                                <?php foreach ($alamat as $row) { ?>
+                                                    <option value="<?= $row->id_provinsi; ?>"><?= $row->nama_provinsi; ?></option>
+                                                <?php  } ?>
+                                            </select>
+                                        </span>
+                                    </div>
+
+                                    <div class="form-group">
                                         <button type="submit" class="wt-btn"><i class="fa fa-save"></i> Simpan</button>
                                     </div>
 

@@ -14,7 +14,7 @@ class Order extends CI_Controller
         $this->load->model('home/Order_model', 'o');
         $this->load->helper('string');
 
-        if ($this->session->userdata('id_user') == "" && $this->session->userdata('role') != "siswa") {
+        if ($this->session->userdata('id_user') == "" || $this->session->userdata('role') != "Siswa") {
             $this->session->set_flashdata('msg_er', 'Anda belum login sebagai siswa');
             redirect('home', 'refresh');
         }
@@ -40,8 +40,12 @@ class Order extends CI_Controller
         $valid = $this->form_validation->set_rules('id_jenjang', 'Jenjang', 'required|callback_select_validate');
         $abcd = $this->input->post('id_tingkat');
         $valid = $this->form_validation->set_rules('id_tingkat', 'Tingkat', 'required|callback_select_validate');
-        $abcd = $this->input->post('id_tentor');
-        $valid = $this->form_validation->set_rules('id_tentor', 'Tentor', 'required|callback_select_validate');
+
+        // Zonasi Tentor
+        // $id_user = $this->session->userdata('id_user');
+        // $alamat = $this->o->listingZonasiSiswa($id_user);
+        // $id_zonasi = $alamat->id_zonasi;
+        // $tentorZona = $this->o->listingZonasi($id_zonasi);
 
 
         if ($valid->run() === FALSE) {
@@ -51,7 +55,7 @@ class Order extends CI_Controller
                 'jenjang'   => $jenjang,
                 'tingkat'   => $tingkat,
                 'waktu'     => $waktu,
-                'tentor'    => $tentor,
+                // 'tentor'    => $tentorZona,
                 'kursus'    => $kursus,
                 'content'   => 'home/order/index'
             ];
@@ -68,14 +72,13 @@ class Order extends CI_Controller
                 'id_waktu'          => $i->post('id_waktu'),
                 'id_jenjang'        => $i->post('id_jenjang'),
                 'id_tingkat'        => $i->post('id_tingkat'),
-                'id_tentor'         => $i->post('id_tentor'),
                 'total'             => $kursus->harga,
                 'is_valid'            => '0'
             );
             $this->Crud_model->add('tbl_order', $data);
             $this->session->set_flashdata('msg', 'Data telah disimpan');
             //$this->orderData($data['id_order']);
-            redirect(base_url('home/order/finish/' . $data['id_order']), 'refresh');
+            redirect(base_url('home/order/tentor/' . $data['id_order']), 'refresh');
         }
     }
 
@@ -98,6 +101,52 @@ class Order extends CI_Controller
     }
 
 
+    function tentor($id_order)
+    {
+        // Zonasi Tentor
+        $order = $this->o->listingOne($id_order);
+        $id_user = $this->session->userdata('id_user');
+        $alamat = $this->o->listingZonasiSiswa($id_user);
+        $id_zonasi = $alamat->id_zonasi;
+        $id_kursus = $order->id_kursus;
+        $tentorZona = $this->o->listingZonasi($id_zonasi, $id_kursus);
+
+        // print_r($tentorZona);
+        // die;
+        $data = [
+            'title'    => 'Ananda Private || Order Kursus',
+            'tentor'    => $tentorZona,
+            'order'     => $order,
+            'content'   => 'home/order/tentor'
+        ];
+
+        $this->load->view('layout/wrapper', $data, FALSE);
+    }
+
+    function detail_tentor($id_tentor)
+    {
+        $tentor = $this->Crud_model->listingOne('tbl_tentor', 'id_user', $id_tentor);
+        $data = [
+            'title'    => 'Ananda Private || ',
+            'tentor'    => $tentor,
+            'content'   => 'home/order/detailtentor'
+        ];
+        $this->load->view('layout/wrapper', $data, FALSE);
+    }
+
+    function pilih_tentor($id_tentor)
+    {
+        $i = $this->input;
+        $id_order = $i->post('id_order');
+        $data = [
+            'id_tentor'      => $id_tentor
+        ];
+        $this->Crud_model->edit('tbl_order', 'id_order', $id_order, $data);
+        $this->session->set_flashdata('msg', 'Tentor dipilih');
+        redirect('home/order/tentor/' . $id_order);
+    }
+
+
     function select_validate($abcd)
     {
         if ($abcd == "none") {
@@ -106,5 +155,18 @@ class Order extends CI_Controller
         } else {
             return true;
         }
+    }
+
+    function test()
+    {
+        $id_user = $this->session->userdata('id_user');
+        $alamat = $this->o->listingZonasiSiswa($id_user);
+        $id_zonasi = $alamat->id_zonasi;
+        $Tentorzona = $this->o->listingZonasi($id_zonasi);
+        print_r($Tentorzona);
+        die;
+        // foreach ($zona as $row) {
+        //     print_r($row);
+        // }
     }
 }

@@ -14,9 +14,28 @@ class Online extends CI_Controller
 
     public function index()
     {
-        $online = $this->KM->listingOnline();
+
+        // $provinsi = $this->Crud_model->listing('tbl_provinsi');
+
+        // Config
+        // $this->db->like('nama_provinsi', $search);
+        $this->db->from('tbl_online');
+
+        $config['base_url']     = base_url('admin/online/index');
+        $config['total_rows']   = $this->db->count_all_results();
+        $config['per_page']     = 3;
+
+        // Initialize
+        $pagination = $this->pagination->initialize($config);
+
+
+        $start      = $this->uri->segment(4);
+        $online = $this->KM->listingOnline($config['per_page'], $start);
+
         $data = [
             'title'    => 'Manajemen Poin',
+            'pagination'=> $pagination,
+            'start'     => $start,
             'online'    => $online,
             'content'   => 'admin/online/index'
         ];

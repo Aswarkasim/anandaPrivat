@@ -26,6 +26,16 @@
         <div class="container">
             <div class="row">
                 <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+
+                    <div class="wt-replaybox">
+                        <h2 class="text-center"><b>PILIH TENTOR ANDA</b></h2>
+                        <ul class="wt-joinsteps">
+                            <li class="wt-done-next"><a href="javascrip:void(0);"><i class="fa fa-check"></i></a></li>
+                            <li class="wt-done-next"><a href="javascrip:void(0);"><i class="fa fa-check"></i></a></li>
+                        </ul>
+                    </div>
+
+
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
                         <div class="wt-proposalholder">
                             <div class="wt-proposalhead">

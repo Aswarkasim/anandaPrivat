@@ -14,12 +14,21 @@
                                     <?php
                                     echo validation_errors('<div class="alert alert-danger"><i class="fa fa-warning"></i> ', '</div>');
 
-                                    echo form_open_multipart('admin/provinsi/edit/' . $provinsi->id_provinsi)
+                                    echo form_open_multipart('admin/kecamatan/edit/' . $kecamatan->id_kecamatan)
                                     ?>
 
                                     <div class="form-group">
-                                        <label for=""><strong>NAMA PROVINSI</strong></label>
-                                        <input type="text" name="nama_provinsi" value="<?= $provinsi->nama_provinsi ?>" class="form-control" placeholder="NAMA PROVINSI">
+                                        <label for=""><strong>NAMA KECAMATAN</strong></label>
+                                        <input type="text" name="nama_kecamatan" value="<?= $kecamatan->nama_kecamatan ?>" class="form-control" placeholder="NAMA PROVINSI">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for=""><strong>ZONASI</strong></label>
+                                        <select name="id_zonasi" id="id_zonasi" class="form-control">
+                                            <option value="">--Pilih Zonasi--</option>
+                                            <?php foreach ($zonasi as $row) { ?>
+                                                <option value="<?= $row->id_zonasi ?>"><?= $row->nama_zonasi ?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">

@@ -9,20 +9,25 @@ class Profil extends CI_Controller
     {
         parent::__construct();
         $this->load->model('siswa/Profil_model', 'pm');
-        if (($this->session->userdata('id_user') == "") && ($this->session->userdata('role') != "Siswa")) {
-            redirect('home');
-        }
+        $this->load->model('siswa/Siswa_model', 'SM');
+        is_logged_in('Siswa');
     }
 
     public function index()
     {
+
         $id_user = $this->session->userdata('id_user');
+
         // $user = $this->Crud_model->listingOne('tbl_user', 'id_user', $id_user);
         $siswa = $this->pm->listingOne($id_user);
+        $kursus = $this->SM->listingOnline('tbl_online.id_siswa', $id_user, '3', null)->result();
+        $keranjang = $this->SM->listingKeranjang('tbl_order.id_siswa', $id_user, '3')->result();
 
         $data = [
             'title'     => $siswa->nama_lengkap,
             'siswa'     => $siswa,
+            'kursus'    => $kursus,
+            'keranjang' => $keranjang,
             'content'   => 'siswa/profil/index'
         ];
 
@@ -54,8 +59,12 @@ class Profil extends CI_Controller
                     ];
                     $this->load->view('layout/wrapper', $data, FALSE);
                 } else {
-                    $upload_data = array('uploads' => $this->upload->data());
+                    $config['width']         = 100;
+                    $config['height']        = 100;
+                    $this->load->library('image_lib', $config);
+                    $this->image_lib->crop();
 
+                    $upload_data = array('uploads' => $this->upload->data());
                     $i = $this->input;
 
                     $data = array(

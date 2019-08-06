@@ -20,10 +20,28 @@ class Kursus extends CI_Controller
 
     public function index()
     {
-        $kursus = $this->Kursus_model->listing();
+        // $provinsi = $this->Crud_model->listing('tbl_provinsi');
+
+        // Config
+        // $this->db->like('nama_provinsi', $search);
+        $this->db->from('tbl_kursus');
+
+        $config['base_url']     = base_url('admin/kursus/index');
+        $config['total_rows']   = $this->db->count_all_results();
+        $config['per_page']     = 5;
+
+        // Initialize
+        $pagination = $this->pagination->initialize($config);
+
+
+        $start      = $this->uri->segment(4);
+
+        $kursus = $this->Kursus_model->listing($config['per_page'], $start);
         $data = [
             'title'    => 'Ananda Private || Manajemen Kursus',
             'add'       => 'admin/kursus/add',
+            'pagination'=> $pagination,
+            'start'     => $start,
             'kursus'    => $kursus,
             'content'   => 'admin/kursus/index'
         ];

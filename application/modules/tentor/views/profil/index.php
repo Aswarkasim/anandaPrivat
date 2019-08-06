@@ -16,8 +16,6 @@
                                     <div class="wt-userprofile">
                                         <figure>
                                             <img src="<?= base_url('assets/uploads/images/' . $tentor->foto); ?>" alt="img description">
-                                            <div class="wt-userdropdown wt-online">
-                                            </div>
                                         </figure>
                                         <div class="wt-title">
                                             <h4>Hubungi Saya</h4>
@@ -44,7 +42,7 @@
                                                     </div>
 
                                                     <div class="wt-insightdetails">
-                                                        <a href="#">Deposit</a>
+                                                        <a href="<?= base_url() ?>tentor/poin">Poin</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -68,21 +66,32 @@
                                         <h2><?= $tentor->nama_lengkap ?></h2>
                                         <ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo mb-4">
                                             <li><span>
-                                                    <?php
-                                                    if ($tentor->gender == "Laki-laki") {
+                                                    <?php if ($tentor->gender == '') {
+                                                        echo '<i class="fa fa-male mr-2" style="color: lightblue;" aria-hidden="true"></i><i class="fa fa-female mr-2" style="color: pink;" aria-hidden="true"></i> Jenis Kelamin';
+                                                    } else if ($tentor->gender == 'Pria') {
                                                         echo '<i class="fa fa-male mr-2" style="color: lightblue;" aria-hidden="true"></i> Pria';
-                                                    } else if ($tentor->gender == "Perempuan") {
+                                                    } else if ($tentor->gender == 'Wanita') {
                                                         echo '<i class="fa fa-female mr-2" style="color: pink;" aria-hidden="true"></i> Perempuan';
                                                     }
                                                     ?>
-
-
-                                                </span></li>
+                                                </span>
+                                            </li>
                                             <li><span>
                                                     <i class="fa fa-suitcase mr-2" aria-hidden="true"></i>
-                                                    <?= $tentor->pekerjaan ?></span></li>
+                                                    <?php if ($tentor->pekerjaan == '') {
+                                                        echo "Pekerjaan";
+                                                    } else {
+                                                        echo $tentor->pekerjaan;
+                                                    } ?>
+                                                </span>
+                                            </li>
                                             <li><i class="fa fa-map-marker mr-2" style="color:red;" aria-hidden="true"></i>
-                                                <?= $tentor->alamat ?></li>
+                                                <?php if ($alamat == '') {
+                                                    echo "Alamat";
+                                                } else {
+                                                    echo strtoupper($alamat->alamat) . ', ' . strtoupper($alamat->nama_kabupaten) . ', ' . strtoupper($alamat->nama_provinsi);
+                                                } ?>
+                                            </li>
                                         </ul>
                                         <div>
                                             <h4>Tentang Saya</h4>
@@ -98,13 +107,78 @@
                                         </ul>
                                         <br>
                                         <div class="tab-content wt-haslayout">
-                                            <!-- Kompetensi -->
-                                            <?php include('kompetensi.php')  ?>
-                                            <!-- end kompetensi -->
+                                            <div class="wt-contentarticle tab-pane fade active show" id="kompetensi">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover">
+                                                        <thead style="background-color:#ff5851" class="text-white">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Kompetensi</th>
+                                                                <th>Jenjang</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php $no = 1;
+                                                            foreach ($kompetensi as $row) { ?>
+                                                                <tr>
+                                                                    <th><?= $no ?></th>
+                                                                    <td><?= $row->nama_kursus ?></td>
+                                                                    <td><?= $row->nama_jenjang ?></td>
+                                                                    <td>
+                                                                        <?php if ($row->is_aktif == '0') {
+                                                                            echo '<a href="#" class="btn btn-warning"><small>Menunggu Wawancara</small></a>';
+                                                                        } elseif ($row->is_aktif == '1') {
+                                                                            echo '<a class="btn btn-success text-white"><small>Aktif</small></a></td>';
+                                                                        } else {
+                                                                            echo '<a class="btn btn-danger text-white"><small>Tidak Aktif</small></a>';
+                                                                        } ?>
 
-                                            <!-- Bimbingan -->
-                                            <?php include('bimbingan.php')  ?>
-                                            <!--end Bimbingan -->
+                                                                    </td>
+                                                                </tr>
+                                                                <?php $no++;
+                                                            } ?>
+
+                                                        </tbody>
+                                                    </table>
+                                                    <a href="<?= base_url() ?>tentor/kompetensi" class="wt-btn float-right mb-3">Lihat Detail</a>
+                                                    <br>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                            <div class="wt-contentarticle tab-pane fade" id="siswabimbingan">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover">
+                                                        <thead style="background-color:#ff5851" class="text-white">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Kursus</th>
+                                                                <th>Jenjang</th>
+                                                                <th>Siswa</th>
+                                                                <th>Jadwal</th>
+                                                                <th>Waktu</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php $no = 1;
+                                                            foreach ($bimbingan as $row) { ?>
+                                                                <tr>
+                                                                    <th><?= $no ?></th>
+                                                                    <td><?= $row->nama_kursus ?></td>
+                                                                    <td><?= $row->nama_jenjang ?></td>
+                                                                    <td><?= $row->nama_lengkap ?></td>
+                                                                    <td><?= $row->hari ?></td>
+                                                                    <td><?= $row->nama_waktu ?> ( <?= $row->awal ?> - <?= $row->akhir ?> )</td>
+                                                                </tr>
+                                                                <?php $no++;
+                                                            } ?>
+                                                        </tbody>
+                                                    </table>
+                                                    <a href="<?= base_url() ?>tentor/bimbingan" class="wt-btn float-right mb-3">Lihat Detail</a>
+                                                    <br>
+                                                    <br>
+                                                </div>
+                                            </div>
 
                                         </div>
 

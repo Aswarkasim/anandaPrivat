@@ -12,7 +12,7 @@
                     <form class="wt-formtheme wt-userform tab-content wt-haslayout">
                         <div class="wt-contentarticle tab-pane fade active show" id="rtk">
                             <div class="table-responsive">
-                                <table class="table table-hover DataTables">
+                                <table class="wt-tablecategories">
                                     <thead style="background-color:#ff5851" class="text-white">
                                         <tr>
                                             <th>No</th>
@@ -29,7 +29,7 @@
                                         <?php $no = 1;
                                         foreach ($bimbingan as $row) { ?>
                                             <tr>
-                                                <th><?= $no ?></th>
+                                                <td><?= $no ?></td>
                                                 <td><?= $row->nama_kursus ?></td>
                                                 <td><?= $row->nama_jenjang ?></td>
                                                 <td><?= $row->nama_lengkap ?></td>
@@ -42,6 +42,9 @@
                                         } ?>
                                     </tbody>
                                 </table>
+                                <nav class="wt-pagination wt-savepagination">
+                                    <?= $this->pagination->create_links() ?>
+                                </nav>
                             </div>
                         </div>
 

@@ -36,4 +36,51 @@ class Order_model extends CI_Model
             ->where('tbl_order.id_order', $id_order);
         return $this->db->get()->row();
     }
+
+    function listingZonasiSiswa($id_user)
+    {
+        $this->db->select('tbl_siswa.*,
+                        tbl_kecamatan.id_zonasi,
+                        tbl_user.role,')
+            ->from('tbl_siswa')
+            ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan = tbl_siswa.id_kecamatan', 'LEFT')
+            ->join('tbl_user', 'tbl_user.id_user = tbl_siswa.id_user', 'LEFT')
+            ->where('tbl_siswa.id_user', $id_user);
+        return $this->db->get()->row();
+    }
+
+    // function listingZonasi($id_zonasi)
+    // {
+    //     $this->db->select('tbl_Tentor.*,
+    //                     tbl_kecamatan.nama_kecamatan,
+    //                     tbl_kecamatan.id_zonasi')
+    //         ->from('tbl_Tentor')
+    //         ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan = tbl_Tentor.id_kecamatan', 'LEFT')
+    //         ->where('id_zonasi', $id_zonasi);
+    //     // ->where('role', 'Siswa')
+    //     // ->where('id_provinsi', '76');
+    //     return $this->db->get()->result();
+    // }
+
+    function listingZonasi($id_zonasi, $id_kursus)
+    {
+        $this->db->select('tbl_kompetensi.*,
+                        tbl_tentor.nama_lengkap,
+                        tbl_tentor.pekerjaan,
+                        tbl_tentor.banner,
+                        tbl_tentor.foto,
+                        tbl_tentor.gender,
+                        tbl_tentor.id_kecamatan,
+                        tbl_tentor.id_kabupaten,
+                        tbl_kecamatan.id_zonasi')
+            ->from('tbl_kompetensi')
+            ->join('tbl_tentor', 'tbl_tentor.id_tentor = tbl_kompetensi.id_tentor', 'LEFT')
+            ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan = tbl_tentor.id_kecamatan', 'LEFT')
+            ->where(array('id_kursus' => $id_kursus, 'id_zonasi' => $id_zonasi, 'is_aktif' => '1'));
+        // ->where('id_zonasi', $id_zonasi)
+        // ->where('tbl_kompetensi.id_kursus', $id_kursus);
+        // ->where('role', 'Siswa')
+        // ->where('id_provinsi', '76');
+        return $this->db->get()->result();
+    }
 }

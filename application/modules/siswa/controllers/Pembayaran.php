@@ -10,11 +10,14 @@ class Pembayaran extends CI_Controller
     {
         parent::__construct();
         $this->load->model('siswa/Siswa_model', 'SM');
+        is_logged_in('Siswa');
     }
 
 
     public function index($id_order)
     {
+        is_read('tbl_order', 'id_order', $id_order);
+
         $id_user = $this->session->userdata('id_user');
         $order = $this->SM->listingKeranjang('id_order', $id_order)->row();
         $pembayaran = $this->Crud_model->listingOne('tbl_pembayaran', 'id_order', $id_order);

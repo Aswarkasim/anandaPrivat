@@ -2,66 +2,46 @@
 	<div class="wt-haslayout wt-dbsectionspace">
 		<div class="wt-dashboardbox wt-dashboardtabsholder">
 			<div class="wt-dashboardboxtitle">
-				<h2>Provinsi</h2>
+				<h2>Edit Alamat</h2>
 			</div>
 			<div style="width: 100%;" class="wt-tabscontent tab-content">
 				<div class="wt-location wt-tabsinfo">
 					<div class="wt-tabscontenttitle">
-						<h2>Your Location</h2>
+						<h2>Alamat Anda</h2>
 					</div>
-					<form class="wt-formtheme wt-userform">
+					<form method="post" action="<?= base_url('tentor/alamat/add'); ?>" class="wt-formtheme wt-userform">
 						<fieldset>
-							<div class="form-group form-group-half">
-								<input value="" type="textarea" name="address" class="form-control" placeholder="Your Address">
-							</div>
-							<div class="form-group form-group-half">
+							<div style="width: 100%;" class="form-group form-group-half">
 								<span class="wt-select">
-									<select class="select2">
+									<select class="select2" name="provinsi" id="provinsi">
 										<option value="">Provinsi</option>
 										<?php foreach ($provinsi as $row) { ?>
-											<option value="<?= $row->id_provinsi  ?>"><?= $row->nama_provinsi ?></option>
+											<option value="<?= $row->id_provinsi; ?>"><?= $row->nama_provinsi; ?></option>
 										<?php  } ?>
 									</select>
 								</span>
 							</div>
-							<div class="form-group form-group-half">
+							<div style="width: 100%;" class="form-group form-group-half">
 								<span class="wt-select">
-									<select>
-										<option value="">Kota</option>
-										<option value="">
-											<?php foreach ($kabupaten as $row) { ?>
-											<option value="<?= $row->id_kabupaten  ?>"><?= $row->nama_kabupaten ?></option>
-										<?php  } ?>
-										</option>
+									<select name="kabupaten" id="kabupaten">
+										<option value="">Kota / Kabupaten</option>
 
 									</select>
 								</span>
 							</div>
-							<div class="form-group form-group-half">
+							<div style="width: 100%;" class="form-group form-group-half">
 								<span class="wt-select">
-									<select>
+									<select name="kecamatan" id="kecamatan">
 										<option value="">Kecamatan</option>
-										<option value="">
-											<?php foreach ($kecamatan as $row) { ?>
-											<option value="<?= $row->id_kecamatan  ?>"><?= $row->nama_kecamatan ?></option>
-										<?php  } ?>
-										</option>
 									</select>
 								</span>
 							</div>
-							<div class="form-group wt-formmap">
-								<div id="wt-locationmap" class="wt-locationmap">
+							<div style="width: 100%;" class="form-group form-group-half">
+								<input type="textarea" name="alamat" class="form-control" placeholder="ALAMAT">
+							</div>
 
-								</div>
-							</div>
-							<div class="form-group form-group-half">
-								<input type="text" name="text" class="form-control" placeholder="Enter Longitude (Optional)">
-							</div>
-							<div class="form-group form-group-half">
-								<input type="text" name="text" class="form-control" placeholder="Enter Latitude (Optional)">
-							</div>
 							<div class="form-group">
-								<button type="submit" class="wt-btn">Simpan</button>
+								<button type="submit" class="wt-btn">tes</button>
 							</div>
 						</fieldset>
 					</form>
@@ -72,3 +52,44 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
 	<script src="<?= base_url('assets/')  ?>js/vendor/jquery-3.3.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+
+	<script>
+		// In your Javascript (external .js resource or <script> tag)
+		$(document).ready(function() {
+
+			$('#provinsi').change(function() {
+				var id_provinsi = $("#provinsi").val();
+				if (id_provinsi != '') {
+					$.ajax({
+						//url: "../alamat/fetch_kabupaten",
+						url: "<?= base_url() ?>siswa/alamat/fetch_kabupaten",
+						method: "POST",
+						data: {
+							id_provinsi: id_provinsi
+						},
+						success: function(data) {
+							$('#kabupaten').html(data);
+						}
+					})
+				}
+			});
+
+			$('#kabupaten').change(function() {
+				var id_kabupaten = $("#kabupaten").val();
+				if (id_kabupaten != '') {
+					$.ajax({
+						//url: "../alamat/fetch_kecamatan",
+						url: "<?= base_url() ?>siswa/alamat/fetch_kecamatan",
+						method: "POST",
+						data: {
+							id_kabupaten: id_kabupaten
+						},
+						success: function(data) {
+							$('#kecamatan').html(data);
+						}
+					})
+				}
+			});
+
+		});
+	</script>

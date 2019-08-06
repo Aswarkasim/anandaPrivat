@@ -4,10 +4,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Crud_model extends CI_Model
 {
 
-    public function listing($table, $order = null)
+    public function listing($table, $limit = null, $start = null, $search = null)
     {
+
+        if ($search) {
+            $this->db->like('nama_provinsi', $search);
+        }
+
         $query = $this->db->select('*')
             ->from($table)
+            ->limit($limit, $start)
             ->get();
         return $query->result();
     }
@@ -28,11 +34,12 @@ class Crud_model extends CI_Model
         return $this->db->get_where($where, $table);
     }
 
-    public function listingOneAll($table, $field, $where)
+    public function listingOneAll($table, $field, $where, $limit = null, $start = null)
     {
         $query = $this->db->select('*')
             ->from($table)
             ->where($field, $where)
+            ->limit($limit, $start)
             ->get();
         return $query->result();
     }

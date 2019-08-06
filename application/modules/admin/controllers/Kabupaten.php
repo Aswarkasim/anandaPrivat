@@ -8,16 +8,43 @@ class Kabupaten extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Pagination_model');
         $this->load->model('admin/Kursus_model');
     }
 
     function index()
     {
-        $kabupaten = $this->Kursus_model->listingKab('tbl_kabupaten');
+        // Data Search
+        if ($this->input->post('submit')) {
+            $search = $this->input->post('searchKabupaten');
+            $this->session->set_userdata('searchKabupaten', $search);
+        } else {
+            $search = $this->session->userdata('searchKabupaten');
+        }
+
+
+        // Config
+        $this->db->like('nama_kabupaten', $search);
+        $this->db->from('tbl_kabupaten');
+
+        $config['base_url']     = base_url('admin/kabupaten/index');
+        $config['total_rows']   = $this->db->count_all_results();
+        $config['per_page']     = 10;
+
+        // Initialize
+        $pagination = $this->pagination->initialize($config);
+
+
+        $start      = $this->uri->segment(4);
+
+        $kabupaten = $this->Kursus_model->listingKab($config['per_page'], $start, $search);
 
         $data = [
             'title'   => 'Registrasi || Ananda Private',
             'add'       => 'admin/kabupaten/add',
+            'pagination' => $pagination,
+            'start'     => $start,
+            'search'    => $search,
             'kabupaten'  => $kabupaten,
             'content'   => 'admin/kabupaten/index'
         ];

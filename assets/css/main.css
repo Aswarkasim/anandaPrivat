@@ -1328,12 +1328,8 @@ body.wt-login .wt-userlogedin{display: block;}
 	font-family:'Linearicons-Free';
 }
 /* Banner Style */
-.wt-bannerholder{
-	background-image: url(../images/bannerimg/123.png);
-	background-size:cover;
-    background-repeat: no-repeat;
-    position: relative;
-}
+
+
 .wt-bannerholder:before{
 	top: 0;
     right: 0;

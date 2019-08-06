@@ -6,17 +6,17 @@ class Alamat_model extends CI_Model
 {
 	function listingOne($id_user)
 	{
-		$this->db->select('tbl_alamat.*,
+		$this->db->select('tbl_tentor.*,
                             tbl_kabupaten.nama_kabupaten,
                             tbl_provinsi.nama_provinsi,
                             tbl_kecamatan.nama_kecamatan
                             ')
-            ->from('tbl_alamat')
-            ->join('tbl_kabupaten', 'tbl_kabupaten.id_kabupaten = tbl_alamat.id_kabupaten', 'LEFT')
-            ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan = tbl_alamat.id_kecamatan', 'LEFT')
-            ->join('tbl_provinsi', 'tbl_provinsi.id_provinsi = tbl_alamat.id_provinsi', 'LEFT')
-            ->where('tbl_alamat.id_user', $id_user);
-        return $this->db->get()->row();
+			->from('tbl_tentor')
+			->join('tbl_kabupaten', 'tbl_kabupaten.id_kabupaten = tbl_tentor.id_kabupaten', 'LEFT')
+			->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan = tbl_tentor.id_kecamatan', 'LEFT')
+			->join('tbl_provinsi', 'tbl_provinsi.id_provinsi = tbl_tentor.id_provinsi', 'LEFT')
+			->where('tbl_tentor.id_user', $id_user);
+		return $this->db->get()->row();
 	}
 
 	function fetch_provinsi()
@@ -32,9 +32,8 @@ class Alamat_model extends CI_Model
 		$this->db->order_by('nama_kabupaten', 'ASC');
 		$query = $this->db->get('tbl_kabupaten');
 		$output = '<option value="">Kota / Kabupaten</option>';
-		foreach($query->result() as $row)
-		{
-			$output .= '<option value="'.$row->id_kabupaten.'">'.$row->nama_kabupaten.'</option>';
+		foreach ($query->result() as $row) {
+			$output .= '<option value="' . $row->id_kabupaten . '">' . $row->nama_kabupaten . '</option>';
 		}
 		return $output;
 	}
@@ -45,11 +44,9 @@ class Alamat_model extends CI_Model
 		$this->db->order_by('nama_kecamatan', 'ASC');
 		$query = $this->db->get('tbl_kecamatan');
 		$output = '<option value="">Kecamatan</option>';
-		foreach($query->result() as $row)
-		{
-			$output .= '<option value="'.$row->id_kecamatan.'">'.$row->nama_kecamatan.'</option>';
+		foreach ($query->result() as $row) {
+			$output .= '<option value="' . $row->id_kecamatan . '">' . $row->id_zonasi . $row->nama_kecamatan . '</option>';
 		}
 		return $output;
 	}
-    
 }

@@ -1,4 +1,6 @@
 <?php
+$id_user = $this->session->userdata('id_user');
+
 
 $nama_user = "";
 $email = "";
@@ -6,7 +8,7 @@ $siswa = "";
 $foto = "";
 $role = "";
 if (($this->session->userdata('id_user')) != "") {
-    $id_user = $this->session->userdata('id_user');
+
     $user = $this->Crud_model->listingOne('tbl_user', 'id_user', $id_user);
     $siswa = $this->Crud_model->listingOne('tbl_siswa', 'id_user', $id_user);
     $nama_user = $user->nama_user;
@@ -43,10 +45,8 @@ if (($this->session->userdata('id_user')) != "") {
                                 }  ?>" width="100px" height="100px" alt="img description">
                 </figure>
                 <div class="wt-title">
-                    <h2><a href="javascript:void(0);"> Louanne Mattioli</a></h2>
-                    <span>Amento Tech</span>
+                    <h2><a href="javascript:void(0);"> <?= $siswa->nama_lengkap ?></a></h2>
                 </div>
-                <div class="wt-btnarea"><a href="dashboard-postjob.html" class="wt-btn">Post a Job</a></div>
             </div>
         </div>
         <nav id="wt-navdashboard" class="wt-navdashboard">
@@ -57,13 +57,17 @@ if (($this->session->userdata('id_user')) != "") {
                         <span>Profil</span>
                     </a>
                 </li>
-                <li>
+                <li class="<?php if (cek_notif_read('tbl_online', 'id_siswa')) {
+                                echo "wt-notificationicon";
+                            } ?>">
                     <a href="<?= base_url('siswa/kursus') ?>">
                         <i class="ti-write"></i>
                         <span>Kursus</span>
                     </a>
                 </li>
-                <li>
+                <li class="<?php if (cek_notif_read('tbl_order', 'id_siswa')) {
+                                echo "wt-notificationicon";
+                            } ?>">
                     <a href="<?= base_url('siswa/keranjang') ?>">
                         <i class="ti-bag"></i>
                         <span>Keranjang</span>
@@ -75,7 +79,15 @@ if (($this->session->userdata('id_user')) != "") {
                 $tagihan = $this->SM->listingTagihan('id_siswa', $id_siswa)->result();
                 ?>
 
-                <li>
+                <?php
+
+                //$cek = $this->Crud_model->cek('tbl_notif', 'id_user', $id_user, 'is_read', '0');
+
+                ?>
+
+                <li class="<?php if (cek_notif_read('tbl_notif', 'id_user')) {
+                                echo "wt-notificationicon";
+                            } ?>">
                     <a href="<?= base_url('siswa/notif') ?>">
                         <i class="ti-envelope"></i>
                         <span>Notifikasi</span>

@@ -1,3 +1,16 @@
+<?php
+$konfigurasi = $this->Crud_model->listingOne('tbl_konfigurasi', 'id_konfigurasi', '1');
+
+?>
+<style>
+    .wt-bannerholder {
+        background-image: url(<?= base_url('assets/uploads/konfigurasi/' . $konfigurasi->banner_main) ?>);
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+    }
+</style>
+
 <!--Home Banner Start-->
 <div class="wt-haslayout wt-bannerholder">
     <div class="container">
@@ -5,9 +18,9 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-5">
                 <div class="wt-bannerimages">
                     <figure class="wt-bannermanimg" data-tilt>
-                        <img src="<?= base_url('assets/')  ?>images/bannerimg/flat.png" class="wt-bannermanimgtwo" alt="img description">
-                        <img src="<?= base_url('assets/')  ?>images/bannerimg/bg.png" class="wt-bannermanimgone" alt="img description">
-                        <img src="<?= base_url('assets/')  ?>images/bannerimg/bg1.png" alt="img description">
+                        <img src="<?= base_url('assets/uploads/konfigurasi/' . $konfigurasi->banner_char_1) ?>" alt="img description">
+                        <img src="<?= base_url('assets/uploads/konfigurasi/' . $konfigurasi->banner_char_2) ?>" class="wt-bannermanimgone" alt="img description">
+                        <img src="<?= base_url('assets/uploads/konfigurasi/' . $konfigurasi->banner_char_3) ?>" class="wt-bannermanimgtwo" alt="img description">
                     </figure>
                 </div>
             </div>
@@ -15,13 +28,13 @@
                 <div class="wt-bannercontent">
                     <div class="wt-bannerhead">
                         <div class="wt-title">
-                            <h1><span>Hire expert freelancers</span> for any job, Online</h1>
+                            <h1><?= $konfigurasi->judul_utama ?></h1>
                         </div>
                         <div class="wt-description">
-                            <p>Consectetur adipisicing elit sed dotem eiusmod tempor incuntes ut labore etdolore maigna aliqua enim.</p>
+                            <p><?= $konfigurasi->deskripsi ?></p>
                         </div>
                     </div>
-                    <form class="wt-formtheme wt-formbanner">
+                    <!-- <form class="wt-formtheme wt-formbanner">
                         <fieldset>
                             <div class="form-group">
                                 <input type="text" name="fullname" class="form-control" placeholder="I’m looking for">
@@ -47,13 +60,13 @@
                                 </div>
                             </div>
                         </fieldset>
-                    </form>
+                    </form> -->
                     <div class="wt-videoholder">
                         <div class="wt-videoshow">
-                            <a data-rel="prettyPhoto[video]" href="https://www.youtube.com/watch?v=J37W6DjqT3Q"><i class="fa fa-play"></i></a>
+                            <a data-rel="prettyPhoto[video]" href="<?= $konfigurasi->link_video ?>"><i class="fa fa-play"></i></a>
                         </div>
                         <div class="wt-videocontent">
-                            <span>See For Yourself!<em>How it works &amp; experience the ultimate joy.</em></span>
+                            <span>Bagaimana saya memulai?<em>Simak video ini.</em></span>
                         </div>
                     </div>
                 </div>

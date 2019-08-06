@@ -14,12 +14,12 @@
                                     <?php
                                     echo validation_errors('<div class="alert alert-danger"><i class="fa fa-warning"></i> ', '</div>');
 
-                                    echo form_open_multipart('admin/provinsi/edit/' . $provinsi->id_provinsi)
+                                    echo form_open_multipart('admin/kabupaten/edit/' . $kabupaten->id_kabupaten)
                                     ?>
 
                                     <div class="form-group">
-                                        <label for=""><strong>NAMA PROVINSI</strong></label>
-                                        <input type="text" name="nama_provinsi" value="<?= $provinsi->nama_provinsi ?>" class="form-control" placeholder="NAMA PROVINSI">
+                                        <label for=""><strong>NAMA KABUPATEN</strong></label>
+                                        <input type="text" name="nama_kabupaten" value="<?= $kabupaten->nama_kabupaten ?>" class="form-control" placeholder="NAMA KABUPATEN">
                                     </div>
 
                                     <div class="form-group">

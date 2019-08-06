@@ -28,10 +28,9 @@
                                 <td align="left"><?= $alamat->nama_kecamatan; ?></td>
                             </tr>
                         </table>
-                        <div class="wt-btnarea"><a href="<?= base_url('tentor/alamat/edit/'.$alamat->id_alamat); ?>" class="wt-btn">Edit</a></div>
+                        <div class="wt-btnarea"><a href="<?= base_url('tentor/alamat/edit/' . $alamat->id_user); ?>" class="wt-btn">Edit</a></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    

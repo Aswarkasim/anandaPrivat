@@ -30,7 +30,7 @@
 
 							<div class="col-12 col-sm-12 col-md-12 col-lg-12 float-left">
 								<div class="wt-btnarea">
-									<a href="javascript:void(0)" class="wt-btn">View All</a>
+									<a href="<?= base_url('home/home/allkursus') ?>" class="wt-btn">View All</a>
 								</div>
 							</div>
 						</div>
@@ -38,37 +38,4 @@
 				</div>
 			</section>
 			<!--Categories End-->
-			<!--Join Company Info Start-->
-			<section class="wt-haslayout wt-main-section wt-paddingnull wt-companyinfohold">
-				<div class="container">
-					<div class="row">
-						<div class="col-12 col-sm-12 col-md-12 col-lg-12">
-							<div class="wt-companydetails">
-								<div class="wt-companycontent">
-									<div class="wt-companyinfotitle">
-										<h2>Start As Company</h2>
-									</div>
-									<div class="wt-description">
-										<p>Consectetur adipisicing elit sed dotem eiusmod tempor incune utnaem labore etdolore maigna aliqua enim poskina ilukita ylokem lokateise ination voluptate velit esse cillum.</p>
-									</div>
-									<div class="wt-btnarea">
-										<a href="javascript:void(0);" class="wt-btn">Join Now</a>
-									</div>
-								</div>
-								<div class="wt-companycontent">
-									<div class="wt-companyinfotitle">
-										<h2>Start As Freelancer</h2>
-									</div>
-									<div class="wt-description">
-										<p>Consectetur adipisicing elit sed dotem eiusmod tempor incune utnaem labore etdolore maigna aliqua enim poskina ilukita ylokem lokateise ination voluptate velit esse cillum.</p>
-									</div>
-									<div class="wt-btnarea">
-										<a href="javascript:void(0);" class="wt-btn">Join Now</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
 			<!--Join Company Info End-->

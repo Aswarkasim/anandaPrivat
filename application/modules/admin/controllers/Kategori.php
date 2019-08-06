@@ -13,10 +13,28 @@ class Kategori extends CI_Controller
 
     function index()
     {
-        $kategori = $this->Crud_model->listing('tbl_kategori');
+        // $provinsi = $this->Crud_model->listing('tbl_provinsi');
+
+        // Config
+        // $this->db->like('nama_provinsi', $search);
+        $this->db->from('tbl_kategori');
+
+        $config['base_url']     = base_url('admin/Kategori/index');
+        $config['total_rows']   = $this->db->count_all_results();
+        $config['per_page']     = 5;
+
+        // Initialize
+        $pagination = $this->pagination->initialize($config);
+
+
+        $start      = $this->uri->segment(4);
+
+        $kategori = $this->Crud_model->listing('tbl_kategori', $config['per_page'], $start);
         $data = [
             'title'   => 'Registrasi || Ananda Private',
             'add'       => 'admin/kategori/add',
+            'pagination'=> $pagination,
+            'start'     => $start,
             'kategori'  => $kategori,
             'content'   => 'admin/kategori/index'
         ];

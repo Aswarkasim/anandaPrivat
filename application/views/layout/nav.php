@@ -18,7 +18,6 @@
                     <h2><a href="javascript:void(0);"> Louanne Mattioli</a></h2>
                     <span>Amento Tech</span>
                 </div>
-                <div class="wt-btnarea"><a href="dashboard-postjob.html" class="wt-btn">Post a Job</a></div>
             </div>
         </div>
         <nav id="wt-navdashboard" class="wt-navdashboard">
@@ -45,16 +44,37 @@
                         <li>
                             <hr><a href="<?= base_url('admin/pembayaran') ?>">Manajemen Pembayaran</a></li>
                         <li>
-                            <hr><a href="<?= base_url('admin/pembayran/masuk') ?>">Masuk</a></li>
+                            <hr><a href="<?= base_url('admin/pembayaran/masuk') ?>">Masuk</a></li>
                         <li>
-                            <hr><a href="<?= base_url('admin/pembayran/selesai') ?>">Selesai</a></li>
+                            <hr><a href="<?= base_url('admin/pembayaran/selesai') ?>">Selesai</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="<?= base_url('admin/poin') ?>">
-                        <i class="ti-widget"></i>
+                <li class="menu-item-has-children">
+                    <a href="javascript:void(0);">
+                        <i class="fa fa-money"></i>
                         <span>Poin</span>
                     </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <hr><a href="<?= base_url('admin/poin') ?>">Tambah Poin</a></li>
+                        <li>
+                            <hr><a href="<?= base_url('admin/poin/pencairan_poin') ?>">Pencairan</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item-has-children">
+                    <a href="javascript:void(0);">
+                        <i class="fa fa-money"></i>
+                        <span>Kompetensi</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <hr><a href="<?= base_url('admin/kompetensi') ?>">Manajemen Kompetensi</a></li>
+                        <li>
+                            <hr><a href="<?= base_url('admin/kompetensi/masuk') ?>">Masuk</a></li>
+                        <li>
+                            <hr><a href="<?= base_url('admin/kompetensi/selesai') ?>">Selesai</a></li>
+                    </ul>
                 </li>
 
                 <li class="menu-item-has-children">
@@ -108,11 +128,11 @@
                 <li class="wt-notificationicon menu-item-has-children">
                     <a href="javascript:void(0);">
                         <i class="ti-pencil-alt"></i>
-                        <span>Messages</span>
+                        <span>Pesan</span>
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <hr><a href="dashboard-messages.html">Messages</a></li>
+                            <hr><a href="<?= base_url('admin/pesan') ?>">Kirim Pesan</a></li>
                         <li>
                             <hr><a href="dashboard-messages2.html">Messages V 2</a></li>
                     </ul>
@@ -134,12 +154,17 @@
                             <hr><a href="<?= base_url('admin/user/siswa') ?>">Siswa</a></li>
                     </ul>
                 </li>
-
-                <li>
-                    <a href="<?= base_url('admin/konfigurasi') ?>">
+                <li class="menu-item-has-children">
+                    <a href="javascript:void(0);">
                         <i class="ti-settings"></i>
                         <span>Konfigurasi</span>
                     </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <hr><a href="<?= base_url('admin/konfigurasi') ?>">General</a></li>
+                        <li>
+                            <hr><a href="<?= base_url('admin/konfigurasi/gambar') ?>">Gambar</a></li>
+                    </ul>
                 </li>
 
             </ul>

@@ -12,7 +12,7 @@
 						</div>
 
 						<?php foreach ($online as $row) { ?>
-							<div class="wt-managejobcontent mt-4">
+							<div class="wt-managejobcontent mt-4 mb-3">
 								<div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
 									<!-- <span class="wt-featuredtag"><img src="<?= base_url('assets/images/'); ?>featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span> -->
 									<div class="wt-userlistingcontent wt-userlistingcontentvtwo">
@@ -32,7 +32,11 @@
 										<div class="wt-rightarea">
 											<div class="wt-btnarea">
 												<span></span>
-												<a href="<?= base_url('siswa/kursus/detail_kursus/' . $row->id_online) ?>" class="wt-btn">Lihat</a>
+												<?php if ($row->is_read == 0) { ?>
+													<a href="<?= base_url('siswa/kursus/detail_kursus/' . $row->id_online) ?>" class="btn btn-primary"><i class="fa fa-envelope"></i> Lihat</a>
+												<?php } else { ?>
+													<a href="<?= base_url('siswa/kursus/detail_kursus/' . $row->id_online) ?>" class="btn btn-success"><i class="fa fa-envelope-open"></i> Lihat</a>
+												<?php } ?>
 											</div>
 											<div class="wt-hireduserstatus">
 												<h4 style="color: #349AE0">
@@ -49,22 +53,11 @@
 								</div>
 							</div><br>
 						<?php } ?>
-
-
 					</div>
+					<nav class="wt-pagination wt-savepagination">
+						<?= $this->pagination->create_links() ?>
+					</nav>
 				</div>
-				<nav class="wt-pagination wt-savepagination">
-					<ul>
-						<li class="wt-prevpage"><a href="javascrip:void(0);"><i class="lnr lnr-chevron-left"></i></a></li>
-						<li><a href="javascrip:void(0);">1</a></li>
-						<li><a href="javascrip:void(0);">2</a></li>
-						<li><a href="javascrip:void(0);">3</a></li>
-						<li><a href="javascrip:void(0);">4</a></li>
-						<li><a href="javascrip:void(0);">...</a></li>
-						<li><a href="javascrip:void(0);">50</a></li>
-						<li class="wt-nextpage"><a href="javascrip:void(0);"><i class="lnr lnr-chevron-right"></i></a></li>
-					</ul>
-				</nav>
 			</div>
 		</div>
 	</div>

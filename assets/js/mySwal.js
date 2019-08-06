@@ -61,6 +61,27 @@ $('.tombol-ubah-status').on('click', function (e) {
         }
     })
 })
+// Tommbol ubah status
+$('.tombol-ubah-status-kompetensi').on('click', function (e) {
+    // Mematikan href
+    e.preventDefault();
+    const href = $(this).attr('href');
+
+    Swal({
+        title: 'Aktifkan kompetensi?',
+        text: "status akan diubah",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.value) {
+            document.location.href = href;
+        }
+    })
+})
 
 // Tommbol ubah status
 $('.tombol-batal-order').on('click', function (e) {
@@ -82,7 +103,4 @@ $('.tombol-batal-order').on('click', function (e) {
         }
     })
 })
-
-
-
 

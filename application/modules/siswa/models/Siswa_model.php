@@ -6,7 +6,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Siswa_model extends CI_Model
 {
 
-    public function listingKeranjang($field, $id_siswa)
+    public function listingKeranjang($field, $id_siswa, $limit = null, $start = null)
     {
         $this->db->select('tbl_order.*,
                         tbl_kursus.nama_kursus,
@@ -34,6 +34,7 @@ class Siswa_model extends CI_Model
             ->join('tbl_tingkat', 'tbl_tingkat.id_tingkat = tbl_order.id_tingkat', 'LEFT')
             ->join('tbl_tentor', 'tbl_tentor.id_tentor = tbl_order.id_tentor', 'LEFT')
             ->join('tbl_waktu', 'tbl_waktu.id_waktu = tbl_order.id_waktu', 'LEFT')
+            ->limit($limit, $start)
             ->where($field, $id_siswa);
         return $this->db->get();
     }
@@ -70,7 +71,7 @@ class Siswa_model extends CI_Model
         return $this->db->get();
     }
 
-    public function listingOnline($field, $where)
+    public function listingOnline($field, $where, $limit = null, $start = null)
     {
         $this->db->select('tbl_online.*,
                         tbl_kursus.nama_kursus,
@@ -99,10 +100,11 @@ class Siswa_model extends CI_Model
             ->join('tbl_tingkat', 'tbl_tingkat.id_tingkat = tbl_online.id_tingkat', 'LEFT')
             ->join('tbl_tentor', 'tbl_tentor.id_tentor = tbl_online.id_tentor', 'LEFT')
             ->join('tbl_waktu', 'tbl_waktu.id_waktu = tbl_online.id_waktu', 'LEFT')
+            ->limit($limit, $start)
             ->where($field, $where);
         return $this->db->get();
     }
-    public function listingNotif($field, $where)
+    public function listingNotif($field, $where, $limit = null, $start = null)
     {
         $this->db->select('tbl_notif.*,
                         tbl_siswa.nama_lengkap,
@@ -110,7 +112,41 @@ class Siswa_model extends CI_Model
             ->from('tbl_notif')
             ->join('tbl_user', 'tbl_user.id_user = tbl_notif.id_admin', 'LEFT')
             ->join('tbl_siswa', 'tbl_siswa.id_siswa = tbl_notif.id_user', 'LEFT')
+            ->limit($limit, $start)
             ->where($field, $where);
         return $this->db->get();
+    }
+
+
+
+    function fetch_provinsi()
+    {
+        $this->db->order_by('nama_provinsi', 'ASC');
+        $query = $this->db->get('tbl_provinsi');
+        return $query->result();
+    }
+
+    function fetch_kabupaten($id_provinsi)
+    {
+        $this->db->where('id_provinsi', $id_provinsi);
+        $this->db->order_by('nama_kabupaten', 'ASC');
+        $query = $this->db->get('tbl_kabupaten');
+        $output = '<option value="">Kota / Kabupaten</option>';
+        foreach ($query->result() as $row) {
+            $output .= '<option value="' . $row->id_kabupaten . '">' . $row->nama_kabupaten . '</option>';
+        }
+        return $output;
+    }
+
+    function fetch_kecamatan($id_kabupaten)
+    {
+        $this->db->where('id_kabupaten', $id_kabupaten);
+        $this->db->order_by('nama_kecamatan', 'ASC');
+        $query = $this->db->get('tbl_kecamatan');
+        $output = '<option value="">Kecamatan</option>';
+        foreach ($query->result() as $row) {
+            $output .= '<option value="' . $row->id_kecamatan . '">' . $row->nama_kecamatan . '</option>';
+        }
+        return $output;
     }
 }

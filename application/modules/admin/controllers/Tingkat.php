@@ -13,11 +13,29 @@ class Tingkat extends CI_Controller
 
     function index()
     {
-        $tingkat = $this->Kursus_model->listingTingkat('tbl_tingkat');
+        // $provinsi = $this->Crud_model->listing('tbl_provinsi');
+
+        // Config
+        // $this->db->like('nama_provinsi', $search);
+        $this->db->from('tbl_tingkat');
+
+        $config['base_url']     = base_url('admin/tingkat/index');
+        $config['total_rows']   = $this->db->count_all_results();
+        $config['per_page']     = 5;
+
+        // Initialize
+        $pagination = $this->pagination->initialize($config);
+
+
+        $start      = $this->uri->segment(4);
+
+        $tingkat = $this->Kursus_model->listingTingkat($config['per_page'], $start);
 
         $data = [
             'title'   => 'Registrasi || Ananda Private',
             'add'       => 'admin/tingkat/add',
+            'pagination'=> $pagination,
+            'start'     => $start,
             'tingkat'  => $tingkat,
             'content'   => 'admin/tingkat/index'
         ];

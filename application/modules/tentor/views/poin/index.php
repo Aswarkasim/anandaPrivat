@@ -15,13 +15,14 @@
                     <div class="wt-insightsitem wt-dashboardbox ml-3">
                         <div class="wt-title text-center">
                             <h3><i class="fa fa-money" aria-hidden="true"></i><br>
-                                Rp. 200.000</h3>
+                                <?= nominal($tentor->poin) ?></h3>
                         </div>
 
                         <div class="wt-insightdetails">
-                            <a href="#">Deposit</a>
+                            <a href="#">Poin</a>
                         </div>
                     </div>
+                    <a href="<?= base_url('tentor/poin/add') ?>" class="wt-btn float-md-right mt-3">Order Poin</a>
                 </div>
 
                 <div class="wt-yourdetails wt-tabsinfo col-12 col-lg-6">
@@ -29,66 +30,44 @@
                         <h2>Cairkan Deposit</h2>
                     </div>
 
-                    <form class="wt-formtheme wt-userform text-center">
-                        <div class="wt-description">
+                    <form action="<?= base_url('tentor/poin/pencairan') ?>" method="post" class="">
+                        <div class="wt-description wt-formtheme wt-userform text-center">
                             <p>Jumlah Deposit Yang Dicairkan Minimal Rp. 500.000 <br> Jumlah Deposit Tidak Boleh Kurang Dari Rp. 200.000</p>
                         </div>
                         <div class="form-group ">
-                            <input type="text" name="tagline" class="form-control" value="Rp. ">
-                            <input type="text" name="tagline" class="form-control mt-2" value="Nomor Rekening">
+                            <label for="">Jumlah Pencairan</label>
+                            <input type="text" name="poin" placeholder="200000" class="form-control">
                         </div>
 
-                        <a href="#" class="wt-btn float-md-right mt-3">Cairkan</a>
+                        <button type="submit" class="wt-btn float-md-right mt-3 tombol-cair">Cairkan</button>
                     </form>
+
                 </div>
+
 
                 <div class="wt-yourdetails wt-tabsinfo col-12">
-                    <div class="wt-tabscontenttitle">
-                        <h2>History Deposit</h2>
-                    </div>
+                    <div class="container-fluid">
+                        <ul class="wt-navarticletab nav navbar-nav">
+                            <li class="nav-item">
+                                <a class="active show" id="all-tab" data-toggle="tab" href="#ListOrderPoin">List Order Poin</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="business-tab" data-toggle="tab" href="#ListPencairanPoin" class="">List Pencairan</a>
+                        </ul>
+                        <br>
+                        <div class="tab-content wt-haslayout">
 
-                    <form class="wt-formtheme wt-userform">
-                        <div class="wt-contentarticle tab-pane">
-                            <div class="table-responsive">
-                                <table class="table table-hover DataTables">
-                                    <thead style="background-color:#ff5851" class="text-white">
-                                        <tr>
-                                            <th>Tanggal</th>
-                                            <th>Keterangan</th>
-                                            <th>Jumlah Sebelum</th>
-                                            <th>Jumlah Sesudah</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th>08-08-2019</th>
-                                            <th>Kursus Selesai</th>
-                                            <th>Rp. 1.000.000</th>
-                                            <th>Rp. 1.800.000</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        <tr>
-                                            <th>08-08-2019</th>
-                                            <th>Mencairkan Deposit</th>
-                                            <th>Rp. 1.800.000</th>
-                                            <th>Rp. 1.200.000</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        <tr>
-                                            <th>08-08-2019</th>
-                                            <th>Kursus Selesai</th>
-                                            <th>Rp. 1.200.000</th>
-                                            <th>Rp. 2.000.000</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <!-- List Order -->
+                            <?php include('list_order.php') ?>
+                            <!-- End List Order -->
+                            <!-- List Pencairan -->
+                            <?php include('list_pencairan.php') ?>
+                            <!-- End List Pencairan -->
+
                         </div>
-
-                    </form>
+                    </div>
                 </div>
+
             </div>
 
         </div>

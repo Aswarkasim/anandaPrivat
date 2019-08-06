@@ -12,10 +12,28 @@ class Waktu extends CI_Controller
 
     function index()
     {
-        $waktu = $this->Crud_model->listing('tbl_waktu');
+        // $provinsi = $this->Crud_model->listing('tbl_provinsi');
+
+        // Config
+        // $this->db->like('nama_provinsi', $search);
+        $this->db->from('tbl_waktu');
+
+        $config['base_url']     = base_url('admin/waktu/index');
+        $config['total_rows']   = $this->db->count_all_results();
+        $config['per_page']     = 3;
+
+        // Initialize
+        $pagination = $this->pagination->initialize($config);
+
+
+        $start      = $this->uri->segment(4);
+
+        $waktu = $this->Crud_model->listing('tbl_waktu', $config['per_page'], $start);
         $data = [
             'title'   => 'Registrasi || Ananda Private',
             'add'       => 'admin/waktu/add',
+            'pagination'=> $pagination,
+            'start'     => $start,
             'waktu'  => $waktu,
             'content'   => 'admin/waktu/index'
         ];

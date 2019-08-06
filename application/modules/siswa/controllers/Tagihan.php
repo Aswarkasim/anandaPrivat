@@ -11,9 +11,7 @@ class Tagihan extends CI_Controller
     {
         parent::__construct();
         $this->load->model('siswa/Siswa_model', 'SM');
-        if (($this->session->userdata('id_user') == "") && ($this->session->userdata('role') != "Siswa")) {
-            redirect('home');
-        }
+        is_logged_in('Siswa');
     }
 
     public function index()

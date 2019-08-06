@@ -10,6 +10,7 @@ class Alamat extends CI_Controller
         parent::__construct();
         $this->load->model('tentor/alamat_model');
         $this->load->model('tentor/profil_model');
+        is_logged_in('Tentor');
     }
 
     function index()
@@ -17,19 +18,19 @@ class Alamat extends CI_Controller
         $id_user = $this->session->userdata('id_user');
         $alamat  = $this->alamat_model->listingOne($id_user);
 
-        if (empty($alamat)) {
+        // if (empty($alamat)) {
 
-            redirect('tentor/alamat/add', 'refresh');
-        } else {
+        //     redirect('tentor/alamat/add', 'refresh');
+        // } else {
 
 
-            $data = [
-                'alamat'    => $alamat,
-                'content'   => 'tentor/profil/editalamat'
-            ];
+        $data = [
+            'alamat'    => $alamat,
+            'content'   => 'tentor/profil/editalamat'
+        ];
 
-            $this->load->view('layout/wrapper', $data);
-        }
+        $this->load->view('layout/wrapper', $data);
+        //  }
     }
 
 
@@ -38,7 +39,7 @@ class Alamat extends CI_Controller
     {
 
         $id_user = $this->session->userdata('id_user');
-        $alamat  = $this->Crud_model->listingOne('tbl_alamat', 'id_user', $id_user);
+        $alamat  = $this->alamat_model->listingOne($id_user);
 
 
         $valid = $this->form_validation;
@@ -57,16 +58,16 @@ class Alamat extends CI_Controller
         } else {
             $i = $this->input;
             $data = [
-                'id_user' => $this->session->userdata('id_user'),
-                'id_provinsi'  => $i->post('provinsi'),
+                'id_user'       => $id_user,
+                'id_provinsi'   => $i->post('provinsi'),
                 'id_kabupaten' => $i->post('kabupaten'),
                 'id_kecamatan' => $i->post('kecamatan'),
                 'alamat'       => $i->post('alamat')
 
             ];
 
-            $this->Crud_model->edit('tbl_alamat', 'id_alamat', $id_alamat, $data);
-            $this->session->set_flashdata('msg', 'diedit');
+            $this->Crud_model->edit('tbl_tentor', 'id_tentor', $id_user, $data);
+            $this->session->set_flashdata('msg', 'disimpan');
             redirect('tentor/alamat');
         }
     }
@@ -74,7 +75,7 @@ class Alamat extends CI_Controller
     function add()
     {
 
-
+        $id_user = $this->session->userdata('id_user');
         $valid = $this->form_validation;
 
         $valid->set_rules('alamat', 'Alamat', 'required', ['required' => 'alamat tidak boleh kosong']);
@@ -90,7 +91,7 @@ class Alamat extends CI_Controller
         } else {
             $i = $this->input;
             $data = [
-                'id_user'       => $this->session->userdata('id_user'),
+                'id_user'       => $id_user,
                 'id_provinsi'   => $i->post('provinsi'),
                 'id_kabupaten' => $i->post('kabupaten'),
                 'id_kecamatan' => $i->post('kecamatan'),
@@ -98,8 +99,8 @@ class Alamat extends CI_Controller
 
             ];
 
-            $this->Crud_model->add('tbl_alamat', $data);
-            $this->session->set_flashdata('msg', 'ditambahkan');
+            $this->Crud_model->edit('tbl_tentor', 'id_tentor', $id_user, $data);
+            $this->session->set_flashdata('msg', 'disimpan');
             redirect('tentor/alamat');
         }
     }

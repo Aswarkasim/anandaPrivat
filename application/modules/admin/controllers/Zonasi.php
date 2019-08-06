@@ -13,12 +13,19 @@ class Zonasi extends CI_Controller
 
     function index()
     {
-        $zonasi = $this->Crud_model->listing('tbl_zonasi');
+
+
+        //$query = $this->Kursus_model->listingSama();
+        // print_r($query);
+        // die;
+        $zonasi = $this->Kursus_model->listingZonasi('tbl_zonasi');
+        $alamat = $this->Crud_model->listing('tbl_provinsi');
 
         $data = [
             'title'   => 'Registrasi || Ananda Private',
             'add'       => 'admin/zonasi/add',
             'zonasi'  => $zonasi,
+            'alamat'  => $alamat,
             'content'   => 'admin/zonasi/index'
         ];
 
@@ -27,13 +34,15 @@ class Zonasi extends CI_Controller
 
     function add()
     {
-        $zonasi = $this->Crud_model->listing('tbl_zonasi');
+        $zonasi = $this->Kursus_model->listingZonasi('tbl_zonasi');
+        $alamat = $this->Crud_model->listing('tbl_provinsi');
         $valid = $this->form_validation;
         $valid->set_rules('nama_zonasi', 'Nama zonasi', 'required', ['required' => '%s tidak boleh kosong']);
 
         if ($valid->run()) {
             $data = array(
-                'nama_zonasi'      => $this->input->post('nama_zonasi')
+                'nama_zonasi'      => $this->input->post('nama_zonasi'),
+                'id_provinsi'      => $this->input->post('id_provinsi')
 
             );
             $this->Crud_model->add('tbl_zonasi', $data);
@@ -43,6 +52,7 @@ class Zonasi extends CI_Controller
         $data = [
             'title'   => 'zonasi || Ananda Private',
             'zonasi'  => $zonasi,
+            'alamat'  => $alamat,
             'content'   => 'admin/zonasi/add'
         ];
 
@@ -51,12 +61,14 @@ class Zonasi extends CI_Controller
     function edit($id_zonasi)
     {
         $zonasi = $this->Crud_model->listingOne('tbl_zonasi', 'id_zonasi', $id_zonasi);
+        $alamat = $this->Crud_model->listing('tbl_provinsi');
         $valid = $this->form_validation;
         $valid->set_rules('nama_zonasi', 'Nama zonasi', 'required', ['required' => '%s tidak boleh kosong']);
 
         if ($valid->run()) {
             $data = array(
                 'nama_zonasi'      => $this->input->post('nama_zonasi'),
+                'id_provinsi'      => $this->input->post('id_provinsi'),
                 'id_zonasi'      => $id_zonasi
             );
             $this->Crud_model->edit('tbl_zonasi', 'id_zonasi', $id_zonasi, $data);
@@ -66,6 +78,7 @@ class Zonasi extends CI_Controller
         $data = [
             'title'     => 'zonasi || Ananda Private',
             'zonasi'  => $zonasi,
+            'alamat'  => $alamat,
             'content'   => 'admin/zonasi/edit'
         ];
 
@@ -77,5 +90,23 @@ class Zonasi extends CI_Controller
         $this->Crud_model->delete('tbl_zonasi', 'id_zonasi', $id_zonasi);
         $this->session->set_flashdata('msg', 'dihapus');
         redirect('admin/zonasi');
+    }
+
+    function filter()
+    {
+        $id_provinsi = $this->input->post('id_provinsi');
+
+        $zonasi = $this->Kursus_model->listingZonasiFilter($id_provinsi);
+        print_r($zonasi);
+
+        // $alamat = $this->Crud_model->listing('tbl_provinsi');
+        // $data = [
+        //     'title'     => 'zonasi || Ananda Private',
+        //     'add'       => 'admin/zonasi/add',
+        //     'zonasi'  => $zonasi,
+        //     'alamat'  => $alamat,
+        //     'content'   => 'admin/zonasi/index'
+        // ];
+        // $this->load->view('layout/wrapper', $data, FALSE);
     }
 }

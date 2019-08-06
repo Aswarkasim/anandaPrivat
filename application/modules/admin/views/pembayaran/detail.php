@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="wt-btn" data-dismiss="modal">Close</button>
+                            <a href="<?= base_url('admin/pembayaran') ?>" class="wt-btn" data-dismiss="modal">Kembali</a>
                             <button type="submit" class="wt-btn" style="background-color: #00cc8d">Simpan Perubahan</button>
                         </div>
                     </form>

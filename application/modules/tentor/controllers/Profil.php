@@ -9,21 +9,29 @@ class Profil extends CI_Controller
     {
         parent::__construct();
         $this->load->model('tentor/Profil_model', 'PM');
+        is_logged_in('Tentor');
     }
 
 
     public function index()
     {
-        $id_tentor = $this->session->userdata('id_user');
+        $id_user = $this->session->userdata('id_user');
         // $user = $this->Crud_model->listingOne('tbl_user', 'id_user', $id_user);
-        $tentor = $this->PM->listingOne($id_tentor);
-        $bimbingan = $this->PM->listingBimbingan('tbl_online.id_tentor', $id_tentor, '3')->result();
+        $tentor = $this->PM->listingOne($id_user);
+        $kompetensi = $this->PM->listingKompetensi($id_user);
+        $alamat  = $this->PM->listingAlamat($id_user);
+        $bimbingan  = $this->PM->listingBimbingan('tbl_online.id_tentor', $id_user)->result();
+
+
+
 
         $data = [
-            'title'     => $tentor->nama_lengkap,
-            'tentor'    => $tentor,
-            'bimbingan' => $bimbingan,
-            'content'   => 'tentor/profil/index'
+            'title'         => $tentor->nama_lengkap,
+            'tentor'        => $tentor,
+            'alamat'        => $alamat,
+            'kompetensi'    => $kompetensi,
+            'bimbingan'     => $bimbingan,
+            'content'       => 'tentor/profil/index'
         ];
 
         $this->load->view('layout/wrapper', $data, FALSE);
@@ -36,8 +44,6 @@ class Profil extends CI_Controller
 
         $valid = $this->form_validation;
         $valid->set_rules('nama_lengkap', 'Nama Lengkap', 'required', ['required' => '%s tidak boleh kosong']);
-        $valid->set_rules('alamat', 'Alamat', 'required', ['required' => '%s tidak boleh kosong']);
-
 
         if ($valid->run()) {
             if (!empty($_FILES['foto']['name'])) {
@@ -50,7 +56,7 @@ class Profil extends CI_Controller
                         'title'     => 'Edit Profil',
                         'profil'    => $profil,
                         'error'     => $this->upload->display_errors(),
-                        'content'   => 'tentor/profil/edit'
+                        'content'   => 'tentor/profil/editprofil'
                     ];
                     $this->load->view('layout/wrapper', $data, FALSE);
                 } else {
@@ -112,7 +118,7 @@ class Profil extends CI_Controller
         $data = [
             'title'     => 'Edit Profil',
             'profil'    => $profil,
-            'content'   => 'tentor/profil/edit'
+            'content'   => 'tentor/profil/editprofil'
         ];
 
         $this->load->view('layout/wrapper', $data, FALSE);

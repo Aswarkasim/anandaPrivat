@@ -34,33 +34,66 @@
 											</ul>
 										</div>
 									</div>
+									<?php
+									$pembayaran = $this->Crud_model->listingOne('tbl_pembayaran', 'id_order', $row->id_order);
+									?>
 									<div class="wt-rightarea">
 										<div class="ml-3 wt-btnarea">
 											<!-- <button type="button" data-toggle="modal" data-target="#bayar" class="wt-btn" style="background-color:#2ecc71">Buat Tagihan</button> -->
 											<a href="<?= base_url('siswa/pembayaran/index/' . $row->id_order) ?>" class="wt-btn" style="background-color:#2ecc71;color:white">Pembayaran</a>
-											<button type="button" href="<?= base_url('siswa/keranjang/batal/' . $row->id_order) ?>" disabled="disable" class="wt-btn tombol-batal-order">Batal</button>
+											<?php
+											if ($pembayaran) {
+												if ($pembayaran->is_valid == 'Valid') {
+													echo ' ';
+												} else if ($pembayaran->is_valid == 'Menunggu') {
+													echo ' ';
+												} else { ?>
+													<button type="button" href="<?= base_url('siswa/keranjang/batal/' . $row->id_order) ?>" class="wt-btn tombol-batal-order">Batal</button>
+												<?php
+												}
+											} else { ?>
+												<button type="button" href="<?= base_url('siswa/keranjang/batal/' . $row->id_order) ?>" class="wt-btn tombol-batal-order">Batal</button>
+											<?php
+											}
+											?>
+
 										</div>
 										<div class="wt-hireduserstatus">
 											<h5>Rp <?= nominal($row->total) ?>,-</h5>
 											<span><?= $row->nama_paket ?></span>
+										</div>
+										<div class="wt-hireduserstatus">
+
+
+											<?php
+
+
+											if ($pembayaran) {
+												if ($pembayaran->is_valid == 'Valid') {
+													echo '<span class="alert alert-success"><i class="fa fa-check"></i> Valid</span>';
+												} else if ($pembayaran->is_valid == 'Unvalid') {
+													echo '<span class="alert alert-danger"><i class="fa fa-times"></i> Unvalid</span>';
+												} else {
+													echo '<span class="alert alert-danger"><i class="fa fa-times"></i> Menunggu Konfirmasi</span>';
+												}
+											} else {
+												echo '<span class="alert alert-warning"><i class="fa fa-warning"></i> Belum dibayar</span>';
+											}
+
+											?>
+
 										</div>
 
 									</div>
 								</div>
 							<?php } ?>
 						</div>
-						<div class="mt-4 wt-updatall">
-							<i class="ti-credit-card"></i>
-							<span><?= 'Rp.' . nominal($totalHarga->total) ?></span>
-							<button type="button" href="javascript:void(0);" class="wt-btn" data-toggle="modal" data-target="#total">Buat Tagihan Semua</button>
-						</div>
 					</div>
+					<nav class="wt-pagination wt-savepagination">
+						<?= $this->pagination->create_links() ?>
+					</nav>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
-
-
-
-<?php include('bayarsemua.php') ?>

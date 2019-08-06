@@ -14,42 +14,56 @@
 					</div>
 
 
-					<form class="wt-formtheme wt-userform">
-						<fieldset class="text-center">
-							<div class="row">
-								<div class="col-md-6 offset-md-3">
+					<fieldset class="text-center" style="border: 1px solid #fcfcfc">
+						<div class="row">
+							<div class="col-md-6 offset-md-3">
 
+								<?php
+								echo validation_errors('<div class="alert alert-danger"><i class="fa fa-warning"></i> ', '</div>');
 
-									<div class="wt-description mt-2">
-										<p class="text-center">Setelah Menambah Kompetensi Silahkan Tunggu Pesan Dari Admin Untuk Panggilan Tes Wawancara</p>
-									</div>
-									<div class="form-group">
-										<span class="wt-select">
-											<select>
-												<option>Kursus</option>
-												<?php foreach ($kursus as $row) { ?>
-		                                            <option value="<?= $row->id_kursus; ?>"><?= $row->nama_kursus; ?></option>
-		                                        <?php  } ?>
-											</select>
-										</span>
-									</div>
-									<div class="form-group">
-										<span class="wt-select">
-											<select>
-												<option>Jenjang</option>
-												<option>SD</option>
-												<option>SMP</option>
-												<option>SMA</option>
-												<option>Perguruan Tinggi</option>
-											</select>
-										</span>
-									</div>
+								if (isset($error)) {
+									echo '<div class="alert alert-danger"><i class="fa fa-warning"></i></div>';
+									echo $error;
+									echo '</div>';
+								}
 
-									<a href="#" class="wt-btn float-md-right mt-3">Tambah Kompetensi</a>
+								echo form_open('tentor/kompetensi/add')
+								?>
+
+								<div class="wt-description mt-2">
+									<p class="text-center">Setelah Menambah Kompetensi Silahkan Tunggu Pesan Dari Admin Untuk Panggilan Tes Wawancara</p>
 								</div>
+
+								<form method="post">
+									<div class="form-group">
+										<span class="wt-select">
+											<select name="id_kursus">
+
+												<option value="none">Kursus</option>
+												<?php foreach ($kursus as $row) { ?>
+													<option value="<?= $row->id_kursus ?>"><?= $row->nama_kursus ?> </option>
+												<?php } ?>
+											</select>
+										</span>
+									</div>
+									<div class="form-group">
+										<span class="wt-select">
+											<select name="id_jenjang">
+												<option value="none">Jenjang</option>
+												<?php foreach ($jenjang as $row) { ?>
+													<option value="<?= $row->id_jenjang ?>"><?= $row->nama_jenjang ?></option>
+												<?php } ?>
+											</select>
+										</span>
+									</div>
+
+									<button name="submit" type="submit" class="wt-btn float-md-right mt-3">Tambah Kompetensi</button>
+								</form>
+								<?= form_close() ?>
+
 							</div>
-						</fieldset>
-					</form>
+						</div>
+					</fieldset>
 				</div>
 
 				<div class="wt-yourdetails wt-tabsinfo">
@@ -61,38 +75,37 @@
 							<table class="table table-hover">
 								<thead style="background-color:#ff5851" class="text-white">
 									<tr>
-										<th>No</th>
+										<th width="80px">No</th>
 										<th>Kompetensi</th>
 										<th>Jenjang</th>
-										<th>Status</th>
+										<th width="180px">Status</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th>1</th>
-										<td>Matematika</td>
-										<td>SMP</td>
-										<td><a class="btn btn-danger text-white"><small>Tidak Aktif</small></a>
-										</td>
-									</tr>
-									<tr>
-										<th>2</th>
-										<td>Matematika</td>
-										<td>SMA</td>
-										<td><a class="btn btn-success text-white"><small>Aktif</small></a></td>
-									</tr>
-									<tr>
-										<th>3</th>
-										<td>Rekayasa Perangkat Lunak</td>
-										<td>Perguruan Tinggi</td>
-										<td>
-											<a href="#" class="btn btn-warning"><small>Menunggu Wawancara</small></a>
-										</td>
-									</tr>
+									<?php $no = 1;
+									foreach ($kompetensi as $row) { ?>
+										<tr>
+											<th><?= $no; ?></th>
+											<td><?= $row->nama_kursus; ?></td>
+											<td><?= $row->nama_jenjang; ?></td>
+											<td>
+												<?php
+												if ($row->is_aktif == 1) {
+													echo '<a class="btn btn-success text-white"><small>Aktif</small></a>';
+												} else if ($row->is_aktif == 0) {
+													echo '<a class="btn btn-danger text-white"><small>Tidak Aktif</small></a>';
+												} else {
+													echo '<a href="#" class="btn btn-warning"><small>Menunggu Wawancara</small></a>';
+												} ?>
+											</td>
+										</tr>
+										<?php $no++;
+									} ?>
 								</tbody>
 							</table>
 						</div>
 					</form>
+
 				</div>
 
 

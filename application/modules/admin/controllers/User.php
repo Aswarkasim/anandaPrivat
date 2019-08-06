@@ -17,9 +17,27 @@ class User extends CI_Controller
 
     public function index()
     {
-        $user = $this->Crud_model->listing('tbl_user');
+        // $provinsi = $this->Crud_model->listing('tbl_provinsi');
+
+        // Config
+        // $this->db->like('nama_provinsi', $search);
+        $this->db->from('tbl_user');
+
+        $config['base_url']     = base_url('admin/user/index');
+        $config['total_rows']   = $this->db->count_all_results();
+        $config['per_page']     = 5;
+
+        // Initialize
+        $pagination = $this->pagination->initialize($config);
+
+
+        $start      = $this->uri->segment(4);
+
+        $user = $this->Crud_model->listing('tbl_user', $config['per_page'], $start);
         $data = [
             'title'    => 'Manajemen User',
+            'pagination'=> $pagination,
+            'start'     => $start,
             'user'     => $user,
             'content'  => 'admin/user/index'
         ];
@@ -28,9 +46,27 @@ class User extends CI_Controller
 
     function admin()
     {
-        $user = $this->Crud_model->listingOneAll('tbl_user', 'role', 'Admin');
+        // $provinsi = $this->Crud_model->listing('tbl_provinsi');
+
+        // Config
+        // $this->db->like('nama_provinsi', $search);
+        $this->db->from('tbl_user');
+
+        $config['base_url']     = base_url('admin/user/admin');
+        $config['total_rows']   = $this->db->count_all_results();
+        $config['per_page']     = 5;
+
+        // Initialize
+        $pagination = $this->pagination->initialize($config);
+
+
+        $start      = $this->uri->segment(4);
+
+        $user = $this->Crud_model->listingOneAll('tbl_user', 'role', 'Admin', $config['per_page'], $start);
         $data = [
             'title'    => 'Manajemen User',
+            'pagination'=> $pagination,
+            'start'     => $start,
             'user'     => $user,
             'content'  => 'admin/user/admin'
         ];
@@ -39,9 +75,27 @@ class User extends CI_Controller
 
     function tentor()
     {
-        $user = $this->Crud_model->listingOneAll('tbl_user', 'role', 'Tentor');
+        // $provinsi = $this->Crud_model->listing('tbl_provinsi');
+
+        // Config
+        // $this->db->like('nama_provinsi', $search);
+        $this->db->from('tbl_user');
+
+        $config['base_url']     = base_url('admin/user/tentor');
+        $config['total_rows']   = $this->db->count_all_results();
+        $config['per_page']     = 5;
+
+        // Initialize
+        $pagination = $this->pagination->initialize($config);
+
+
+        $start      = $this->uri->segment(4);
+
+        $user = $this->Crud_model->listingOneAll('tbl_user', 'role', 'Tentor', $config['per_page'], $start);
         $data = [
             'title'    => 'Manajemen User',
+            'pagination'=> $pagination,
+            'start'     => $start,
             'user'     => $user,
             'content'  => 'admin/user/tentor'
         ];
@@ -50,9 +104,27 @@ class User extends CI_Controller
 
     function siswa()
     {
-        $user = $this->Crud_model->listingOneAll('tbl_user', 'role', 'Siswa');
+        // $provinsi = $this->Crud_model->listing('tbl_provinsi');
+
+        // Config
+        // $this->db->like('nama_provinsi', $search);
+        $this->db->from('tbl_user');
+
+        $config['base_url']     = base_url('admin/user/tentor');
+        $config['total_rows']   = $this->db->count_all_results();
+        $config['per_page']     = 5;
+
+        // Initialize
+        $pagination = $this->pagination->initialize($config);
+
+
+        $start      = $this->uri->segment(4);
+
+        $user = $this->Crud_model->listingOneAll('tbl_user', 'role', 'Siswa', $config['per_page'], $start);
         $data = [
             'title'    => 'Manajemen User',
+            'pagination'=> $pagination,
+            'start'     => $start,
             'user'     => $user,
             'content'  => 'admin/user/tentor'
         ];
